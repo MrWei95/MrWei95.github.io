@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Tommy Wei">
+
+
+    <meta name="subtitle" content="Blog of MrWei95">
+
+
+    <meta name="description" content="Sharing interesting things!">
+
+
+
+<title>CMake编译龙架构简单工程 | MrWei95的博客</title>
+
+
+
+    <link rel="icon" href="/95_Logo.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">博客主页</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">博客主页</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+
+
+
+
+            <div class="main">
+                <div class="container">
+    
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">CMake编译龙架构简单工程</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Tommy Wei</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2025 二月 15&nbsp;&nbsp;15:56:28</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91/">【嵌入式学习笔记】</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><font  size=4 > </font><br><font  size=4 >配置了一个中午，终于编译通过了(笑)，赶紧了备份目录，现在把CMakeLists.txt抄一遍。一开始是跟着<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1XgNzeTE9S/">龙邱</a>配的，但他工程里面有C文件，也有Cpp文件，混着来反正没听太明白(笑)，网上查资料根本查不到什么，只能让<a target="_blank" rel="noopener" href="https://chat.deepseek.com/">DeepSeek</a>帮我纠错（“服务器繁忙，请稍后再试。”）</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.16)</span><br><span class="line"></span><br><span class="line">set(CMAKE_C_COMPILER /opt/loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1/bin/loongarch64-linux-gnu-gcc)</span><br><span class="line"></span><br><span class="line"># 项目名称</span><br><span class="line">project(main C)</span><br><span class="line"></span><br><span class="line">file(GLOB SRC $&#123;PROJECT_SOURCE_DIR&#125;/code/*.c)</span><br><span class="line">include_directories($&#123;PROJECT_SOURCE_DIR&#125;/include)</span><br><span class="line">include_directories(/opt/loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1/loongarch64-linux-gnu/sysroot/usr/include/)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">add_executable(app $&#123;SRC&#125;)</span><br></pre></td></tr></table></figure>
+<p><font  size=4 >主要的问题是指定C文件编译的目录太长容易拼错，现在换成虚拟机后看得难受，报错的话是提示编译工具找不到。</font><br><font  size=4 >还有一种错误是提示Cpp文件编译工具找不到，这是因为CMake有Cpp编译器检测，纯C的代码要么得加一句<code>set(CMAKE_CXX_COMPILER_WORKS 1)</code>禁用Cpp编译器检测，要么就得在<code>project(main)</code>的<code>main</code>后面加一个<code>C</code>来表示工程是C文件。</font><br><font  size=4 >编译的步骤一般是在工程目录建一个build目录，名字一般也叫“build”，然后终端cd到build目录，执行下面这个命令构建Makefile：</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">cmake -DCMAKE_C_COMPILER=/opt/loongson-gun-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1/bin/loongarch64-linux-gnu-gcc ..</span></span><br></pre></td></tr></table></figure>
+<p><font  size=4 >如果没有报错的话就是构建成功了，一般有报错的话，build目录下可以找到生成的error log，终端也会输出信息。如果没有报错的话返回工程根目录，执行下面的命令就可以编译工程了：</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">cmake --build build</span></span><br></pre></td></tr></table></figure>
+<p><font  size=4 >第一个<code>--build</code>是构建命令，第二个<code>build</code>是输出路径。</font></p>
+<p><font  size=4 >【本文完】</font><br><font  size=4 ></font></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Tommy Wei</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<span class="site-pv">
+    Views:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+                
+                
+                
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8F%E3%80%91/"># 【嵌入式】</a>
+                    
+                        <a href="/tags/%E3%80%90Loongarch%E3%80%91/"># 【Loongarch】</a>
+                    
+                        <a href="/tags/%E3%80%90CMake%E3%80%91/"># 【CMake】</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2025/02/13/2k0300-putty-serial-connect/">龙芯2K0300串口连接</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 2024 - 2025 Tommy Wei | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+
+    </div>
+</body>
+
+</html>

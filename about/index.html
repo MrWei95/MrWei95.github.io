@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Tommy Wei">
+
+
+    <meta name="subtitle" content="Blog of MrWei95">
+
+
+    <meta name="description" content="Sharing interesting things!">
+
+
+
+<title>关于MrWei95的博客 | MrWei95的博客</title>
+
+
+
+    <link rel="icon" href="/95_Logo.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">博客主页</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">博客主页</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+
+
+
+
+            <div class="main">
+                <div class="container">
+    <article class="post-wrap page">
+        
+        <h2 class="post-title">关于MrWei95的博客</h2>
+        
+        <section class="post-content">
+            <img src="/about/index/full.png" class="" title="png" style="zoom:40%;" >
+
+<h3 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a><font face="微软雅黑" >自我介绍</font></h3><p><font face="微软雅黑" size=4 >我目前是一个就读本科大一的菜鸟大学生，爱好嵌入式、Android玩机，喜欢分享有趣的东西。我会将我探索的过程分享到这个博客中(非盈利)，当然，你也可以去看看我的GitHub仓库，我会将感兴趣的嵌入式小项目放在那里！访问<a target="_blank" rel="noopener" href="https://space.bilibili.com/2004315025">我的Bilibili主页</a>，也许会找到感兴趣的内容哦(笑)！如有建议或疑问，欢迎联系邮箱：<a href="mailto:&#x6d;&#x72;&#119;&#101;&#105;&#57;&#53;&#x40;&#111;&#x75;&#116;&#x6c;&#x6f;&#111;&#107;&#46;&#99;&#111;&#109;">&#x6d;&#x72;&#119;&#101;&#105;&#57;&#53;&#x40;&#111;&#x75;&#116;&#x6c;&#x6f;&#111;&#107;&#46;&#99;&#111;&#109;</a></font></p>
+<h3 id="博客改善计划"><a href="#博客改善计划" class="headerlink" title="博客改善计划"></a><font face="微软雅黑" >博客改善计划</font></h3><p><font face="微软雅黑" size=4 >· 添加代码的“复制”按钮</font><br><font face="微软雅黑" size=4 >· 优化界面整体视觉效果</font></p>
+
+        </section>
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 2024 - 2025 Tommy Wei | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+
+    </div>
+</body>
+
+</html>

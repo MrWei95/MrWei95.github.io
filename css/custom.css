@@ -1,0 +1,10 @@
+.post-content figure.highlight figcaption {
+  text-align: left;
+}
+.footer {
+  height: 3rem;
+  line-height: 1.2rem;
+}
+footer {
+  text-align: right;
+}

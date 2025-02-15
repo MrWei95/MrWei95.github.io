@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Tommy Wei">
+
+
+    <meta name="subtitle" content="Blog of MrWei95">
+
+
+    <meta name="description" content="Sharing interesting things!">
+
+
+
+<title>Hexo-Chic相关问题 | MrWei95的博客</title>
+
+
+
+    <link rel="icon" href="/95_Logo.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const currentTheme = window.localStorage && window.localStorage.getItem('theme') || '';
+            const isDark = currentTheme === 'dark';
+            const pagebody = document.getElementsByTagName('body')[0]
+            if (isDark) {
+                pagebody.classList.add('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Dark"
+            } else {
+                pagebody.classList.remove('dark-theme');
+                // mobile
+                document.getElementById("mobile-toggle-theme").innerText = "· Light"
+            }
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">博客主页</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">博客主页</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">归档</a>
+                
+                    <a class="menu-item" href="/category">分类</a>
+                
+                    <a class="menu-item" href="/tag">标签</a>
+                
+                    <a class="menu-item" href="/about">关于</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+
+
+
+
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+
+
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Hexo-Chic相关问题</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Tommy Wei</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2024 九月 08&nbsp;&nbsp;15:22:47</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E3%80%90MrWei95%E5%8D%9A%E5%AE%A2%E6%97%A5%E5%BF%97%E3%80%91/">【MrWei95博客日志】</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><font face="微软雅黑" size=4 > </font></p>
+<p><font face="微软雅黑" size=4 >搭建这个博客的时候还是一个大一菜鸟，没接触过HTML、Web开发之类的，Git也不会用，那自然这个博客自定义起来也是困难重重了(笑)，而且我选择的这个Chic主题还比较简约，很多非必要功能就直接不做了，这点我倒是很认可作者<a target="_blank" rel="noopener" href="https://github.com/Siricee">Siricee</a>在<a target="_blank" rel="noopener" href="https://siricee.github.io/hexo-theme-Chic/2019/06/05/backreview_hexo_theme_Chic/">示例博客</a>中所说的<strong>“绝不会让设计为功能让步”</strong>。但是各处都需要我自己修改，这肯定很麻烦(笑)。本文总结我遇到过的相关问题，持续更新。</font></p>
+<h1 id="generate问题"><a href="#generate问题" class="headerlink" title="generate问题"></a><font face="微软雅黑" >generate问题</font></h1><p><font face="微软雅黑"  >这类问题真的很玄学，即使到今天我还是只能通过不断<code>hexo clean</code>再<code>hexo g</code>解决。</font></p>
+<h2 id="部署后无改变"><a href="#部署后无改变" class="headerlink" title="部署后无改变"></a><font face="微软雅黑" >部署后无改变</font></h2><p><font face="微软雅黑" size=4 > </font></p>
+<table>
+<thead>
+<tr>
+<th><img src="/2024/09/08/Hexo-Chic-Problems/github%E9%83%A8%E7%BD%B2.png" alt="GitHub部署"></th>
+<th><img src="/2024/09/08/Hexo-Chic-Problems/localhost.png" alt="localhost部署"></th>
+</tr>
+</thead>
+</table>
+<p><font face="微软雅黑" size=4 >比如上面这两张图，我修改了代码，想让归档页面的字体大一点。左边是generate后部署到GitHub Page后呈现的界面，右边是localhost时呈现的界面，截取像素面积是一样的，明显看出来GitHub部署的页面字体特别小，但问题是不论我怎么改都无济于事！localhost会随着我修改代码而改变，GitHub部署的页面纹丝不动！</font></p>
+<p><font face="微软雅黑" size=4 >修改正文右侧的目录标签的时候也遇到相同的问题，虽然修改了行宽，部署的页面却一直没有改变。</font></p>
+<p><font face="微软雅黑" size=4 >经过一段时间的尝试，我发现在<code>theme</code>目录下编辑的一些东西生成时不会立刻改变，我的解决办法就是使用<code>hexo clean</code>清除生成的目录，再<code>hexo g</code>生成一遍后部署，才有可能正常。</font></p>
+<h2 id="文件geneerate后错位"><a href="#文件geneerate后错位" class="headerlink" title="文件geneerate后错位"></a><font face="微软雅黑" >文件geneerate后错位</font></h2><p><font face="微软雅黑" size=4 >我在写第二篇博客的时候需要配图，源图片是放在<code>../source/_post/文章文件同名文件夹/</code>下的，生成的时候应该生成到对应的目录下的，但是我在generate的时候却生成到了上一篇博客的目录下，并且文件名称还少了几个字母，拿这篇博客使用的图片举例，我放在源目录下的文件名为<code>github部署.png</code>，生成错位的目录下就变成了<code>thub部署.png</code>，我尝试过删掉文件、重新命名等一系列方法都无效，最后还是<code>hexo clean</code>再<code>hexo g</code>才解决。</font><br><font face="微软雅黑" size=4 >我不知道这是不是只有我一个人遇到过，不过我确实可以稳定触发这个问题，只要我往我的相应post添加图像文件，直接generate出来都会出现这种错位情况：</font><br><font face="微软雅黑" size=4 > </font><br><img src="/2024/09/08/Hexo-Chic-Problems/example.png" class="" title="example" style="zoom:100%;"><br><font face="微软雅黑" size=4 > </font><br><font face="微软雅黑" size=4 color=#00A2E8 >（遇到问题慢慢写，有的时候懒瘾一犯就会无限制拖下去了(笑)）</font></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Tommy Wei</span>
+                    </p>
+                
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<span class="site-pv">
+    Views:
+    <i class="busuanzi-value" id="busuanzi_value_site_pv"></i>
+</span>
+
+                
+                
+                
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/%E3%80%90Web%E3%80%91/"># 【Web】</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2024/11/29/SFML-Learning1/">SFML编写基础窗口</a>
+            
+            
+            <a class="next" rel="next" href="/2024/09/02/L298N-USE/">L298N电机驱动模块</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© 2024 - 2025 Tommy Wei | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+
+    </div>
+</body>
+
+</html>
