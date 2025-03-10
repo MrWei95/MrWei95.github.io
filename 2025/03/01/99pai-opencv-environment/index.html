@@ -239,7 +239,7 @@
 <h2 id="开发板配置"><a href="#开发板配置" class="headerlink" title="开发板配置"></a><font>开发板配置</font></h2><p><font  size=4 >配置完后在build目录下执行<code>make</code>命令进行编译，编译完成后再执行<code>make install</code>，就可以在install目录下找到四个目录，将四个目录丢到开发板用户目录下的opencv目录里(目录需要自己创建)。</font><br><img src="/2025/03/01/99pai-opencv-environment/makeinstall.png" class="" title="makeinstall" style="zoom:100%;"><br><font  size=4 >在开发板<code>/etc</code>下创建<strong>ld.so.conf.d</strong>目录，在里面创建一个<strong>opencv.conf</strong>文件，文件里面写如下内容：</font></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/root/opencv/lib</span><br></pre></td></tr></table></figure>
 <p>然后终端执行<code>ldconfig</code>使其生效。</p>
-<h1 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a><font>第二部分</font></h1><p><font  size=4 ></font><br><font  size=4 >【最后编辑：2025&#x2F;03&#x2F;10】</font><br><font  size=4 ></font></p>
+<h1 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a><font>第二部分</font></h1><p><font  size=4 >写到这里的时候，龙邱B站刚好发了<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1bKRGYfEgA/">OpenCV编译教程</a>，太逆天了(笑)，顺手查了一下，六七天前它的<a target="_blank" rel="noopener" href="https://gitee.com/lq-tech/Loongson_2k300_LIB">例程库</a>还开源了(笑)，那<strong>CMakeLists</strong>就好配置了，只需要把刚刚<code>make install</code>过的文件复制到工程目录里，在<strong>CMakeLists</strong>里把指定OpenCV所用头文件路径改一下就好了。</font><br><img src="/2025/03/01/99pai-opencv-environment/CMakeLists.png" class="" title="CMakeLists" style="zoom:100%;"><br><font  size=4 >【最后编辑：2025&#x2F;03&#x2F;10】</font><br><font  size=4 ></font></p>
 
         </div>
 
