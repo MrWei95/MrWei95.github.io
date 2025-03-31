@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://mrwei95.github.io/2025/03/30/2k0300-network-2/rc.local.png">
 <meta property="article:published_time" content="2025-03-30T09:36:06.000Z">
-<meta property="article:modified_time" content="2025-03-30T09:44:27.130Z">
+<meta property="article:modified_time" content="2025-03-31T13:35:28.488Z">
 <meta property="article:author" content="Tommy Wei">
 <meta property="article:tag" content="【Internet】">
 <meta property="article:tag" content="【嵌入式】">
@@ -284,7 +284,7 @@
 <h2 id="手动连接无线网"><a href="#手动连接无线网" class="headerlink" title="手动连接无线网"></a><font>手动连接无线网</font></h2><p><font  size=4 >先输入这个命令：</font></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell">wpa_supplicant -B -i wlan0 -c &lt;(wpa_passphrase &quot;网络名称&quot; &quot;网络密码&quot;)<br></code></pre></td></tr></table></figure>
 <p><font  size=4 >据逐飞所说，等3秒再输一遍上面的命令，然后输入下面这个命令：</font></p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">udhcpc -<span class="hljs-selector-tag">i</span> wlan0<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell">udhcpc -i wlan0<br></code></pre></td></tr></table></figure>
 <p><font  size=4 >然后<code>ifconfig</code>看一下，应该能显示IPv4的地址了，拿电脑ping一下，应该能ping通了。</font></p>
 <h2 id="自动连接无线网"><a href="#自动连接无线网" class="headerlink" title="自动连接无线网"></a><font>自动连接无线网</font></h2><p><font  size=4 >为了让开发板上电自动连接无线网，我们要修改<code>/etc</code>下的<strong>rc.local</strong>文件。</font><br><img src="/2025/03/30/2k0300-network-2/rc.local.png" srcset="/img/loading.gif" lazyload class="" title="rc.local" style="zoom:100%;"><br><font  size=4 >红框里的就是我们要添加的，<strong>注意两条命令后面一定要加“&amp;”，意思是在后台运行，否则开机会卡死</strong>，改完之后重启就行了。</font></p>
 <p><font  size=4 >【最后编辑：2025&#x2F;03&#x2F;30】</font><br><font  size=4 ></font></p>
@@ -356,7 +356,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2025年3月30日</div>
+          <div>2025年3月31日</div>
         </div>
       
       
