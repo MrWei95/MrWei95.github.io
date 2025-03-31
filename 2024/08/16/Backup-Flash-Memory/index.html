@@ -1,0 +1,671 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/">
+  <link rel="icon" href="/95_Logo.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Tommy Wei">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="玩机有风险，刷机需谨慎！！！本文将带你学会如何备份Android设备的字库文件(包含基带)。 如需观看视频教程可跳转本人视频，文章、视频如有错误，欢迎指出！ 什么是字库，为什么要备份字库？字库可以简单理解为Android设备的分区。刷机时也会刷入分区，但刷入不完整。如果设备刚好是其他分区损坏了，那么即使线刷完整包也无法修复。所以为了预防特殊分区损坏、也为了预防不小心刷入格机模块(rm -rf &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android设备备份字库">
+<meta property="og:url" content="https://mrwei95.github.io/2024/08/16/Backup-Flash-Memory/index.html">
+<meta property="og:site_name" content="95的博客">
+<meta property="og:description" content="玩机有风险，刷机需谨慎！！！本文将带你学会如何备份Android设备的字库文件(包含基带)。 如需观看视频教程可跳转本人视频，文章、视频如有错误，欢迎指出！ 什么是字库，为什么要备份字库？字库可以简单理解为Android设备的分区。刷机时也会刷入分区，但刷入不完整。如果设备刚好是其他分区损坏了，那么即使线刷完整包也无法修复。所以为了预防特殊分区损坏、也为了预防不小心刷入格机模块(rm -rf &amp;#">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-08-16T05:26:54.000Z">
+<meta property="article:modified_time" content="2024-12-27T09:31:22.506Z">
+<meta property="article:author" content="Tommy Wei">
+<meta property="article:tag" content="【Android】">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Android设备备份字库-95的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mrwei95.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":20,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>MrWei95的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Android设备备份字库"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-16 13:26" pubdate>
+          2024年8月16日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Android设备备份字库</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="玩机有风险，刷机需谨慎！！！"><a href="#玩机有风险，刷机需谨慎！！！" class="headerlink" title="玩机有风险，刷机需谨慎！！！"></a><font face="微软雅黑" color=#FF000 >玩机有风险，刷机需谨慎！！！</font></h1><p><font face="微软雅黑" size=4 >本文将带你学会如何备份Android设备的字库文件(包含基带)。</font></p>
+<p><font face="微软雅黑" size=4 >如需观看视频教程可跳转<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1bje8eVEjK/">本人视频</a>，文章、视频如有错误，欢迎指出！</font></p>
+<h1 id="什么是字库，为什么要备份字库？"><a href="#什么是字库，为什么要备份字库？" class="headerlink" title="什么是字库，为什么要备份字库？"></a><font face="微软雅黑" >什么是字库，为什么要备份字库？</font></h1><p><font face="微软雅黑" size=4 >字库可以简单理解为Android设备的分区。刷机时也会刷入分区，但刷入不完整。如果设备刚好是其他分区损坏了，那么即使线刷完整包也无法修复。所以为了预防特殊分区损坏、也为了预防不小心刷入格机模块(rm -rf &#x2F;)，玩机前我们需要自行备份Android设备的字库文件。</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Shell">基带分区<br>高通机型：fsg，fsc，modemst1，modemst2<br>联发科机型：nvram，nvdata，nvcfg，persist，protect1，protect2，seccfg<br></code></pre></td></tr></table></figure>
+<p><font face="微软雅黑" size=4 color=#FF000 >请注意！！！如果是高通机型，可直接使用本文的命令，如果是联发科机型，请将下面命令中的<code>/dev/block/bootdevice/by-name</code>修改为<code>/dev/block/by-name</code></font></p>
+<h1 id="备份字库"><a href="#备份字库" class="headerlink" title="备份字库"></a><font face="微软雅黑" >备份字库</font></h1><p><font face="微软雅黑" size=3 color=#FF000 >本文使用的方法是手动在Shell中键入指令以达成备份字库的目的，酷安上有教程可在手机上直接执行备份和恢复，写的很好，但本人认为恢复部分有些许问题，因此不采用这种方法。缘由我已经在视频里说了，所以不要再在我视频评论区里说什么“XXX直接秒”之类的了，等你需要恢复字库的时候手机屏幕都不一定亮得起来。</font></p>
+<h2 id="备份的前提条件"><a href="#备份的前提条件" class="headerlink" title="备份的前提条件"></a><font face="微软雅黑" >备份的前提条件</font></h2><h3 id="·-设备需获取Root权限"><a href="#·-设备需获取Root权限" class="headerlink" title="· 设备需获取Root权限"></a><font face="微软雅黑" >· 设备需获取Root权限</font></h3><p><font face="微软雅黑" size=4 >我选择使用Magisk获取Root权限，获取方式参考<a target="_blank" rel="noopener" href="http://www.bilibili.com/video/BV17aY9e4E9o/">我的视频</a>。当然，如果你没有获取Root权限，或者说连Bootloader锁都没有解开，那也没有必要备份字库，正常用就行，多一事不如少一事。</font></p>
+<h3 id="·-开启设备的USB调试"><a href="#·-开启设备的USB调试" class="headerlink" title="· 开启设备的USB调试"></a><font face="微软雅黑" >· 开启设备的USB调试</font></h3><p><font face="微软雅黑" size=4 >在开发者选项中打开。</font></p>
+<h3 id="·-在Android至少预留20GB可用空间"><a href="#·-在Android至少预留20GB可用空间" class="headerlink" title="· 在Android至少预留20GB可用空间"></a><font face="微软雅黑" >· 在Android至少预留20GB可用空间</font></h3><p><font face="微软雅黑" size=4 >现代Android设备分区很多，占用空间也很大，本人的小米平板6(pipa)备份文件大约十几GB。</font></p>
+<h3 id="·-给予Shell以Root权限"><a href="#·-给予Shell以Root权限" class="headerlink" title="· 给予Shell以Root权限"></a><font face="微软雅黑" >· 给予Shell以Root权限</font></h3><p><font face="微软雅黑" size=4 > 将设备连接至电脑，在终端进入adb shell(需提前拥有platform-tools，如何安装参考<a target="_blank" rel="noopener" href="http://www.bilibili.com/video/BV1KJ4m1u7or/">我的视频中安装驱动部分</a>。首次使用设备会提示“是否给予Root权限”，给予即可。指令如下：</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">adb shell<br>su<br></code></pre></td></tr></table></figure>
+
+<h2 id="备份流程"><a href="#备份流程" class="headerlink" title="备份流程"></a><font face="微软雅黑" >备份流程</font></h2><h3 id="·-创建工作目录"><a href="#·-创建工作目录" class="headerlink" title="· 创建工作目录"></a><font face="微软雅黑" >· 创建工作目录</font></h3><p><font face="微软雅黑" size=4 >首先，我们在设备sdcard目录下创建一个用于存储备份字库的目录：</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir /sdcard/000_Backup<br></code></pre></td></tr></table></figure>
+<p><font face="微软雅黑" size=4 >这个时候我们就可以在设备的文件浏览器看到这个目录生成了，当然，这一步也可以使用设备独立完成。</font></p>
+<h3 id="·-读取设备的分区信息"><a href="#·-读取设备的分区信息" class="headerlink" title="· 读取设备的分区信息"></a><font face="微软雅黑" >· 读取设备的分区信息</font></h3><p><font face="微软雅黑" size=4 >在终端中输入以下命令，这里注意，我的指令中屏蔽了userdata和缓存分区(没有必要)。</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls -1 /dev/block/bootdevice/by-name | grep -ixvE &quot;userdata|cache&quot; | while IFS= read -r name; do echo &quot;dd if=/dev/block/bootdevice/by-name/$name of=/sdcard/000_Backup/$name.img&quot; &gt;&gt; /sdcard/000_Backup/001_Backup.sh; echo &quot;fastboot flash $name $name.img&quot; &gt;&gt; /sdcard/000_Backup/002_Restore.bat; done<br></code></pre></td></tr></table></figure>
+<p><font face="微软雅黑" size=4 >执行完成后，000_Backup目录下会多出一个sh脚本和一个bat脚本，sh脚本用于读取备份，bat用于还原备份。</font></p>
+<h3 id="·-执行备份脚本"><a href="#·-执行备份脚本" class="headerlink" title="· 执行备份脚本"></a><font face="微软雅黑" >· 执行备份脚本</font></h3><p><font face="微软雅黑" size=4 >我们使用001_Backup.sh脚本执行备份：</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sh /sdcard/000_Backup/001_Backup.sh<br></code></pre></td></tr></table></figure>
+<p><font face="微软雅黑" size=4 >随后终端会显示备份的进度，耐心等待。</font></p>
+<h3 id="·-创建MD5值表（可不看）"><a href="#·-创建MD5值表（可不看）" class="headerlink" title="· 创建MD5值表（可不看）"></a><font face="微软雅黑" >· 创建MD5值表（可不看）</font></h3><p><font face="微软雅黑" size=4 >备份完成后我们执行下面这条命令，它会计算我们备份出来的所有文件的MD5值并将其全部整理至003_MD5Hsah.txt这个文本中。</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd /sdcard/000_Backup &amp;&amp; md5sum * &gt; /sdcard/000_Backup/003_MD5Hsah.txt<br></code></pre></td></tr></table></figure>
+<p><font face="微软雅黑" size=4 >备份MD5值是为了防止在存储过程中备份文件出现损坏，而我们浑然不知，将这个损坏的分区刷进手机导致出错。</font></p>
+<p><font face="微软雅黑" size=4 >到这里基础备份工作就完成了！</font></p>
+<h2 id="手动修改bat脚本（可不看）"><a href="#手动修改bat脚本（可不看）" class="headerlink" title="手动修改bat脚本（可不看）"></a><font face="微软雅黑" >手动修改bat脚本（可不看）</font></h2><p><font face="微软雅黑" size=4 >我们备份字库的目的就是还原那些刷机包中没有的分区文件，如果刷机包中包含某些文件，我们就没有必要还原，不然可能会导致版本冲突，并且浪费时间。我们可以修改bat脚本中的指令，使还原的时候不会恢复super等分区。</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sed -i -e &#x27;/ super.img/s/^/::/g&#x27; -e &#x27;/ system.img/s/^/::/g&#x27; -e &#x27;/ system_a.img/s/^/::/g&#x27; -e &#x27;/ system_b.img/s/^/::/g&#x27; -e &#x27;/ vendor.img/s/^/::/g&#x27; -e &#x27;/ vendor_a.img/s/^/::/g&#x27; -e &#x27;/ vendor_b.img/s/^/::/g&#x27; -e &#x27;/ mmcblk0.img/s/^/::/g&#x27; -e &#x27;/ sda.img/s/^/::/g&#x27; -e &#x27;/ sdb.img/s/^/::/g&#x27; -e &#x27;/ sdc.img/s/^/::/g&#x27; -e &#x27;/ sdd.img/s/^/::/g&#x27; -e &#x27;/ sde.img/s/^/::/g&#x27; -e &#x27;/ sdf.img/s/^/::/g&#x27; -e &#x27;/ sdg.img/s/^/::/g&#x27; /sdcard/000_Backup/002_Restore.bat<br></code></pre></td></tr></table></figure>
+<p><font face="微软雅黑" size=4 >然后我们给它打包一下：</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd /sdcard &amp;&amp; tar -zcpvf PartitionBackup.tgz 000_Backup<br></code></pre></td></tr></table></figure>
+<p><font face="微软雅黑" size=4 >等处理完，我们就可以在sdcard根目录下就可以看到PartitionBackup.tgz，我们将tgz压缩文件备份至电脑端，以后要用直接解压就很方便了。到此为止，备份工作结束，我们可以删除设备存储中的000_Backup目录，释放空间。</font></p>
+<h1 id="恢复字库"><a href="#恢复字库" class="headerlink" title="恢复字库"></a><font face="微软雅黑" >恢复字库</font></h1><p><font face="微软雅黑" size=4 >当我们的设备分区损坏后，我们就可以通过我们备份的分区进行修复。我们只需要解压备份文件，将手机启动至Fastboot模式连接电脑，在终端执行我们备份文件中的002_Restore.bat脚本，我们备份的分区就会被写入设备，写完后我们再线刷一下官方线刷包，格式化data分区后就可以正常开机进系统了！</font><br><font face="微软雅黑" size=4 >如果批量恢复后设备系统还是有问题，可以尝试在fastboot模式下擦除某分区，然后手动刷入该分区的备份，当然这么做有很大的风险。</font></p>
+<h2 id="擦除某分区"><a href="#擦除某分区" class="headerlink" title="擦除某分区"></a><font face="微软雅黑" size=4 >擦除某分区</font></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">fastboot erase 分区名称<br></code></pre></td></tr></table></figure>
+<h2 id="刷写某分区"><a href="#刷写某分区" class="headerlink" title="刷写某分区"></a><font face="微软雅黑" size=4 >刷写某分区</font></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">fastboot flash 分区名称 用户刷写的文件路径<br></code></pre></td></tr></table></figure>
+
+<p><font face="微软雅黑" size=4 >【本文完】</font><br><font face="微软雅黑" size=4 > </font><br><font face="微软雅黑" size=4 >参考资料：</font><br><font face="微软雅黑" size=4 ><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%97%AA%E5%AD%98">维基百科</a></font><br><font face="微软雅黑" size=4 ><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%89%8B%E6%9C%BA%E5%AD%97%E5%BA%93/5296009">百度百科</a></font><br><font face="微软雅黑" size=4 ><a target="_blank" rel="noopener" href="https://miuiver.com/backup-phone-partition/">MIUI历史版本</a></font><br><font face="微软雅黑" size=4 ><a target="_blank" rel="noopener" href="https://root99.cn/index.php/archives/438/">极客Root站</a></font></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E3%80%90Android%E7%8E%A9%E6%9C%BA%E6%97%A5%E5%BF%97%E3%80%91/" class="category-chain-item">【Android玩机日志】</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E3%80%90Android%E3%80%91/" class="print-no-link">#【Android】</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Android设备备份字库</div>
+      <div>https://mrwei95.github.io/2024/08/16/Backup-Flash-Memory/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Tommy Wei</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月16日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年12月27日</div>
+        </div>
+      
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/09/02/L298N-USE/" title="L298N电机驱动模块">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">L298N电机驱动模块</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/08/15/hello-world/" title="First Step!">
+                        <span class="hidden-mobile">First Step!</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

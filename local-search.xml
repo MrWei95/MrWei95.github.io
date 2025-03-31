@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>久久派连接无线网</title>
+    <link href="/2025/03/30/2k0300-network-2/"/>
+    <url>/2025/03/30/2k0300-network-2/</url>
+    
+    <content type="html"><![CDATA[<p><font  size=4 >逐飞的教程真好用啊！(笑)</font></p><h2 id="手动连接无线网"><a href="#手动连接无线网" class="headerlink" title="手动连接无线网"></a><font>手动连接无线网</font></h2><p><font  size=4 >先输入这个命令：</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell">wpa_supplicant -B -i wlan0 -c &lt;(wpa_passphrase &quot;网络名称&quot; &quot;网络密码&quot;)<br></code></pre></td></tr></table></figure><p><font  size=4 >据逐飞所说，等3秒再输一遍上面的命令，然后输入下面这个命令：</font></p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">udhcpc -<span class="hljs-selector-tag">i</span> wlan0<br></code></pre></td></tr></table></figure><p><font  size=4 >然后<code>ifconfig</code>看一下，应该能显示IPv4的地址了，拿电脑ping一下，应该能ping通了。</font></p><h2 id="自动连接无线网"><a href="#自动连接无线网" class="headerlink" title="自动连接无线网"></a><font>自动连接无线网</font></h2><p><font  size=4 >为了让开发板上电自动连接无线网，我们要修改<code>/etc</code>下的<strong>rc.local</strong>文件。</font><br><img src="/2025/03/30/2k0300-network-2/rc.local.png" class="" title="rc.local" style="zoom:100%;"><br><font  size=4 >红框里的就是我们要添加的，<strong>注意两条命令后面一定要加“&amp;”，意思是在后台运行，否则开机会卡死</strong>，改完之后重启就行了。</font></p><p><font  size=4 >【最后编辑：2025&#x2F;03&#x2F;30】</font><br><font  size=4 ></font></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>【嵌入式学习笔记】</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>【Internet】</tag>
+      
+      <tag>【嵌入式】</tag>
+      
+      <tag>【龙芯久久派】</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>久久派Linux挂载U盘</title>
+    <link href="/2025/03/15/99pai-udisk/"/>
+    <url>/2025/03/15/99pai-udisk/</url>
+    
+    <content type="html"><![CDATA[<p><font  size=4 > </font><br><font  size=4 >还没写。</font><br><font  size=4 >【最后编辑：2025&#x2F;03&#x2F;17】</font><br><font  size=4 ></font></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>【嵌入式学习笔记】</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>【龙芯久久派】</tag>
+      
+      <tag>【Linux】</tag>
+      
+      <tag>【存储】</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>久久派OpenCV环境配置</title>
+    <link href="/2025/03/01/99pai-opencv-environment/"/>
+    <url>/2025/03/01/99pai-opencv-environment/</url>
+    
+    <content type="html"><![CDATA[<p><font  size=4 > </font><br><font  size=4 >这玩意儿分两部分，一部分是编译安装用于开发板的文件，另一部分是上位机写程序用的环境。先去<a href="https://opencv.org/">官网</a>下载最新的源码。</font></p><h1 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a><font>第一部分</font></h1><p><font  size=4 >要用到的东西还挺多的(有些安装还要搞定包冲突)：</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install cmake</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install cmake-qt-gui</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install cmake-curses-gui</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install build-essential</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install libopenblas-dev</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install git</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install pkg-config</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install libavcodec-dev</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install libavformat-dev</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install libswscale-dev</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install python-dev</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install python-numpy</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install libtbb2</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install libtbb-dev</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install libjpeg-dev</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install libpng-dev</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install libtiff5-dev</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install libdc1394-22-dev</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install libv4l-dev</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install liblapacke-dev</span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install libopencv-dev</span><br></code></pre></td></tr></table></figure><h2 id="配置CMake"><a href="#配置CMake" class="headerlink" title="配置CMake"></a><font>配置CMake</font></h2><p><font  size=4 >解压源码，在源码根目录下建一个build目录和一个install目录，在build目录中使用<code>cmake-gui</code>，用于设置编译配置。按照下面这张图依次设置源码路径(opencv源码根目录)、build目录(刚刚建的build目录)、把<strong>Advance</strong>打勾(推荐把前面的Grouped也打勾、选择<strong>Generate</strong>：</font><br><img src="/2025/03/01/99pai-opencv-environment/cmakegui1.png" class="" title="gui" style="zoom:100%;"><br><font  size=4 >选择<strong>Generate</strong>后会打开一个“CMakeSetup”窗口，选择最下面的<strong>Specify options for cross-compiling</strong>，下一步，然后会打开下图窗口：</font><br><img src="/2025/03/01/99pai-opencv-environment/cmakegui2.png" class="" title="gui" style="zoom:100%;"><br><font  size=4 >其中重点要编辑Compilers里面的C和C++，下面的Target Root指向交叉编译工具的bin目录就行。编辑完成选择<strong>Finish</strong>。</font><br><font  size=4 >回到主界面后找到<strong>CMAKE_EXE_LINKER_FLAGS</strong>，把它的值改为<code>-lpthread -lrt -ldl</code>。再找到<strong>CMAKE_INSTALL_PREFIX</strong>，把它的值改为刚刚创建的install目录路径，这样最终文件会安装在这里，网上查资料看到如果在这里不修改<strong>CMAKE_INSTALL_PREFIX</strong>的值，最终的文件会安装在<code>/usr/local</code>下。接着再找到<strong>BUILD_TESTS</strong>，取消勾选，否则会导致编译不通过。网上看到有人说还要在源码目录 <code>/3rdparty/protobuf/src/google/protobuf/stubs/common.cc</code>这个文件下添加**#define HAVE_PTHREAD** 宏定义才可以编译的过，但是实测OpenCV 4.11.0不需要添加这个宏定义，添加后编译会提示重复定义。</font><br><img src="/2025/03/01/99pai-opencv-environment/cmakegui3.png" class="" title="gui" style="zoom:100%;"><br><img src="/2025/03/01/99pai-opencv-environment/cmakegui4.png" class="" title="gui" style="zoom:100%;"></p><h2 id="开发板配置"><a href="#开发板配置" class="headerlink" title="开发板配置"></a><font>开发板配置</font></h2><p><font  size=4 >配置完后在build目录下执行<code>make</code>命令进行编译，编译完成后再执行<code>make install</code>，就可以在install目录下找到四个目录，将四个目录丢到开发板用户目录下的opencv目录里(目录需要自己创建)。</font><br><img src="/2025/03/01/99pai-opencv-environment/makeinstall.png" class="" title="makeinstall" style="zoom:100%;"><br><font  size=4 >在开发板<code>/etc</code>下创建<strong>ld.so.conf.d</strong>目录，在里面创建一个<strong>opencv.conf</strong>文件，文件里面写如下内容：</font></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs opencv.conf">/home/root/opencv/lib<br></code></pre></td></tr></table></figure><p>然后终端执行<code>ldconfig</code>使其生效。</p><h1 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a><font>第二部分</font></h1><h2 id="CMakeLists修改"><a href="#CMakeLists修改" class="headerlink" title="CMakeLists修改"></a><font>CMakeLists修改</font></h2><p><font  size=4 >写到这里的时候，龙邱B站刚好发了<a href="https://www.bilibili.com/video/BV1bKRGYfEgA/">OpenCV编译教程</a>，太逆天了(笑)，顺手查了一下，六七天前它的<a href="https://gitee.com/lq-tech/Loongson_2k300_LIB">例程库</a>还开源了(笑)，那<strong>CMakeLists</strong>就好配置了，只需要把刚刚<code>make install</code>过的文件复制到工程目录里，在<strong>CMakeLists</strong>里把指定OpenCV所用头文件路径改一下就好了。</font><br><img src="/2025/03/01/99pai-opencv-environment/CMakeLists.png" class="" title="CMakeLists" style="zoom:100%;"><br><font  size=4 >【最后编辑：2025&#x2F;03&#x2F;17】</font><br><font  size=4 ></font></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>【嵌入式学习笔记】</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>【嵌入式】</tag>
+      
+      <tag>【龙芯久久派】</tag>
+      
+      <tag>【OpenCV】</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>久久派网络问题日志(旧)</title>
+    <link href="/2025/02/17/2k0300-network-1/"/>
+    <url>/2025/02/17/2k0300-network-1/</url>
+    
+    <content type="html"><![CDATA[<p><font  size=4 > </font></p><h1 id="有线网"><a href="#有线网" class="headerlink" title="有线网"></a><font>有线网</font></h1><h2 id="2025-02-17"><a href="#2025-02-17" class="headerlink" title="2025&#x2F;02&#x2F;17"></a><font>2025&#x2F;02&#x2F;17</font></h2><p><font  size=4 >这是好几天前的故事了(笑)，本来应该很简单的联网、连ssh，然后写程序测试程序，结果我第一步就卡住，这开发板连不上网！</font><br><font  size=4 >99派的有线网应该是即插即用的，连接ssh的标准流程就是查询一下IP，然后直接<code>ssh root@IP地址</code>就行的。这一流程的唯一问题就是IP可能不定，可以通过修改网络配置固定IP，我照着<a href="https://www.bilibili.com/video/BV14D421u7Gw/">B站教程</a>修改了半天没用，接着我又跟着<a href="https://www.bilibili.com/video/BV1qf421X7RJ/">他的下一期视频</a>修改，尝试配置无线网络，改到最后不知道改错了什么，开发板连百度都ping不通了，只好照着视频把我修改过的部分都改了回来，中途红温数次。</font><br><font  size=4 >我查看开发板有线网的IP居然是<code>10.0.0.101</code>，我原本印象里IP应该都是“192”之类开头的，真是太惭愧了，查过资料才知道“10”打头的是私网IP，现在运营商一般不会给公网IP了。</font><br><font  size=4 >最后我的榆木脑袋终于想到搜索引擎搜不到的可以问AI(笑)，赶紧把问题丢给DeepSeek。我的问题是开发板<code>/etc/network/interfaces</code>是空的，里面没有任何参数，经测试得知我的开发板网络管理用的是<code>systemd-networkd</code>，通过执行<code>$ systemctl status systemd-networkd</code>命令可以获取参数：</font><br><img src="/2025/02/17/2k0300-network-1/systemd-networkd.png" class="" title="IP" style="zoom:100%;"><br><font  size=4 >最后配置好，终于ping通了网络，成功用ssh远程连上开发板。</font><br><img src="/2025/02/17/2k0300-network-1/success_ssh.png" class="" title="shell" style="zoom:100%;"></p><h1 id="无线网"><a href="#无线网" class="headerlink" title="无线网"></a><font>无线网</font></h1><h2 id="2025-02-26"><a href="#2025-02-26" class="headerlink" title="2025&#x2F;02&#x2F;26"></a><font>2025&#x2F;02&#x2F;26</font></h2><p><font  size=4 >终于把无线网连上了！以后调试起来就轻松了。</font></p><h2 id="2025-03-01"><a href="#2025-03-01" class="headerlink" title="2025&#x2F;03&#x2F;01"></a><font>2025&#x2F;03&#x2F;01</font></h2><p><font  size=4 ><del>使用无线网连接首先遇到的问题是开发板无线网默认是AP模式，修改<code>/etc/rc.local</code>，把<code>hostapd...</code>和<code>udhcpd...</code>两句注释掉，添加一句<code>wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant.conf</code>，接着在<code>wpa_supplicant.conf</code>里面添加我们要连接的网络的信息，这里注意，网络的安全类型建议设置为开放，不然即使说明了安全类型也可能连不上。cat一下，最后是在这样的：</del></font><br><img src="/2025/02/17/2k0300-network-1/wpa_supplicant.conf.png" class="" title="wpa_supplicant.conf" style="zoom:100%;"><br><font  size=4 ><del>重启一下就可以连上网络了。</del></font><br><font  size=4 ><del>无线网连上Android热点后的问题就是开发板不会给自己分配IPv4地址，虽然两边看着都是连着的，但是ping不通。修改<code>/etc/rc.local</code>，自己指定IP地址再重启就可以，但是前提是知道网关，可以让电脑先连同一热点，然后<code>ipconfig</code>查看一下。</del></font><br><font  size=4 ><del>但是问题又来了，Android热点IP是不固定的，总不能每次用都配一下吧？我直接把平板root，使用软件固定了IP。</del></font><br><font  size=4 ><del>最后cat一下：</del></font><br><img src="/2025/02/17/2k0300-network-1/rc.local.png" class="" title="rc.local" style="zoom:100%;"><br><font  size=4 ><del>有的时候还会遇到问题(笑)，网连上，网关正确，防火墙也没问题，IP地址也配置了，但是还是ping不通，有的时候ping通了，重启一下又没了；此时主机端可以看到开发板连上，但是检测不到开发板的IPv4地址(我真的是受够了)，此时我找到了一个不知道什么原理的方法：</del></font><br><font  size=4 ><del>先用这个命令添加IP地址，子网要和电脑查询的一样：</del></font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell">ip addr add 192.168.248.100/24 dev wlan0<br></code></pre></td></tr></table></figure><p><font  size=4 ><del>然后设置默认网关：</del></font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell">ip route add default via 192.168.248.215 dev wlan0<br></code></pre></td></tr></table></figure><p><font  size=4 ><del>最后添加 DNS 服务器：</del></font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell">echo &quot;nameserver 8.8.8.8&quot; | tee /etc/resolv.conf<br></code></pre></td></tr></table></figure><p><font  size=4 ><del>过一会儿就能连上了。(逆天)</del></font></p><h2 id="2025-03-30"><a href="#2025-03-30" class="headerlink" title="2025&#x2F;03&#x2F;30"></a><font>2025&#x2F;03&#x2F;30</font></h2><p><font  size=4 >逐飞的教程真好用啊！(笑)</font><br><font  size=4 >先输入这个命令：</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell">wpa_supplicant -B -i wlan0 -c &lt;(wpa_passphrase &quot;网络名称&quot; &quot;网络密码&quot;)<br></code></pre></td></tr></table></figure><p><font  size=4 >据逐飞所说，等3秒再输一遍上面的命令，然后输入下面这个命令：</font></p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">udhcpc -<span class="hljs-selector-tag">i</span> wlan0<br></code></pre></td></tr></table></figure><p><font  size=4 >然后<code>ifconfig</code>看一下，应该能显示IPv4的地址了，拿电脑ping一下，应该能ping通了。</font></p><h1 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a><font>SSH</font></h1><h2 id="2025-02-19"><a href="#2025-02-19" class="headerlink" title="2025&#x2F;02&#x2F;19"></a><font>2025&#x2F;02&#x2F;19</font></h2><p><font  size=4 >使用SSH把编译好的程序传给开发板，接下来才能正常干活。</font><br><font  size=4 >使用一条命令直接发送文件：</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">scp /path/to/file/app root@开发板IP地址:/home/root</span><br></code></pre></td></tr></table></figure><p><font  size=4 >这个方法最简单，我在虚拟机里编译好程序就可以直接用终端发给虚拟机，不用再回到Windows用MobaXterm传输。</font><br><font  size=4 >第二种方法是用MobaXterm传输，优点是可以图形化操作文件：</font><br><img src="/2025/02/17/2k0300-network-1/ssh_file.png" class="" title="MobaXterm" style="zoom:100%;"><br><font  size=4 >但是要注意的是，传输后可能无法访问这个文件，会提示<code>permission denied</code>，这时候就要提高权限，我直接用<code>chmod -R 777 指定目录</code>把<code>/home/root</code>给予所有用户拥有最高权限。<code>-R</code>的意思是级联应用到目录里的所有子目录和文件。</font></p><p><font  size=4 >【最后编辑：2025&#x2F;03&#x2F;30】</font><br><font  size=4 ></font></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>【嵌入式学习笔记】</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>【Internet】</tag>
+      
+      <tag>【嵌入式】</tag>
+      
+      <tag>【龙芯久久派】</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>久久派程序编译日志</title>
+    <link href="/2025/02/15/cmake-build-c-loongarch/"/>
+    <url>/2025/02/15/cmake-build-c-loongarch/</url>
+    
+    <content type="html"><![CDATA[<p><font  size=4 > </font></p><h2 id="2025-02-15"><a href="#2025-02-15" class="headerlink" title="2025&#x2F;02&#x2F;15"></a><font>2025&#x2F;02&#x2F;15</font></h2><p><font  size=4 >配置了一个中午，终于编译通过了(笑)，赶紧了备份目录，现在把CMakeLists.txt抄一遍。一开始是跟着<a href="https://www.bilibili.com/video/BV1XgNzeTE9S/">龙邱</a>配的，但他工程里面有C文件，也有Cpp文件，混着来反正没听太明白(笑)，网上查资料根本查不到什么，只能让<a href="https://chat.deepseek.com/">DeepSeek</a>帮我纠错（“服务器繁忙，请稍后再试。”）</font></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs CMakeLists.txt">cmake_minimum_required(VERSION 3.16)<br><br>set(CMAKE_C_COMPILER /opt/loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1/bin/loongarch64-linux-gnu-gcc)<br><br># 项目名称<br>project(main C)<br><br>file(GLOB SRC $&#123;PROJECT_SOURCE_DIR&#125;/code/*.c)<br>include_directories($&#123;PROJECT_SOURCE_DIR&#125;/include)<br>include_directories(/opt/loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1/loongarch64-linux-gnu/sysroot/usr/include/)<br><br>add_executable(app $&#123;SRC&#125;)<br></code></pre></td></tr></table></figure><p><font  size=4 >主要的问题是指定C文件编译的目录太长容易拼错，现在换成虚拟机后看得难受，报错的话是提示编译工具找不到。</font><br><font  size=4 >还有一种错误是提示Cpp文件编译工具找不到，这是因为CMake有Cpp编译器检测，纯C的代码要么得加一句<code>set(CMAKE_CXX_COMPILER_WORKS 1)</code>禁用Cpp编译器检测，要么就得在<code>project(main)</code>的<code>main</code>后面加一个<code>C</code>来表示工程是C文件。</font><br><font  size=4 >编译的步骤一般是在工程目录建一个build目录，名字一般也叫“build”，然后终端cd到build目录，执行下面这个命令构建Makefile：</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">cmake -DCMAKE_C_COMPILER=/opt/loongson-gun-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1/bin/loongarch64-linux-gnu-gcc ..</span><br></code></pre></td></tr></table></figure><p><font  size=4 >如果没有报错的话就是构建成功了，一般有报错的话，build目录下可以找到生成的error log，终端也会输出信息。如果没有报错的话就返回工程根目录，执行下面的命令就可以编译工程了：</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">cmake --build build</span><br></code></pre></td></tr></table></figure><p><font  size=4 >第一个<code>--build</code>是构建命令，第二个<code>build</code>是输出的路径。</font></p><h2 id="2025-02-17"><a href="#2025-02-17" class="headerlink" title="2025&#x2F;02&#x2F;17"></a><font>2025&#x2F;02&#x2F;17</font></h2><p><font  size=4 >查了很多资料，发现很多人不管写OpenCV还是别的程序都用的C++，所以还是把C++的编译加上，顺便把main.cpp移到了根目录，编译了一下没问题。</font></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs CMakeLists.txt">cmake_minimum_required(VERSION 3.16)<br><br>set(CMAKE_C_COMPILER /opt/loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1/bin/loongarch64-linux-gnu-gcc)<br>set(CMAKE_CXX_COMPILER /opt/loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1/bin/loongarch64-linux-gnu-g++)<br><br># 项目名称<br>project(main)<br><br>file(GLOB SRC $&#123;PROJECT_SOURCE_DIR&#125;/code/*.cpp)<br>include_directories($&#123;PROJECT_SOURCE_DIR&#125;/include)<br>include_directories(/opt/loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1/loongarch64-linux-gnu/sysroot/usr/include/)<br><br>add_executable(app main.cpp $&#123;SRC&#125;)<br></code></pre></td></tr></table></figure><p><font  size=4 >【最后编辑：2025&#x2F;02&#x2F;17】</font><br><font  size=4 ></font></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>【嵌入式学习笔记】</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>【嵌入式】</tag>
+      
+      <tag>【龙芯久久派】</tag>
+      
+      <tag>【Loongarch】</tag>
+      
+      <tag>【CMake】</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>久久派串口连接(Linux)</title>
+    <link href="/2025/02/13/2k0300-putty-serial-connect/"/>
+    <url>/2025/02/13/2k0300-putty-serial-connect/</url>
+    
+    <content type="html"><![CDATA[<p><font  size=4 > </font></p><h1 id="一、安装串口工具"><a href="#一、安装串口工具" class="headerlink" title="一、安装串口工具"></a><font>一、安装串口工具</font></h1><p><font  size=4 >使用下面的命令可以安装Putty工具：</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt install putty</span><br></code></pre></td></tr></table></figure><h1 id="二、配置Putty工具"><a href="#二、配置Putty工具" class="headerlink" title="二、配置Putty工具"></a><font>二、配置Putty工具</font></h1><p><font  size=4 >串口工具需要在sudo权限下运行，终端执行<code>$ sudo putty</code>会打开串口软件，此时就可以正常使用了。</font></p><h2 id="1-串口设置"><a href="#1-串口设置" class="headerlink" title="1.串口设置"></a><font>1.串口设置</font></h2><p><font  size=4 >在<code>Session</code>菜单中将<code>Connection type</code>选项选择<code>Serial</code>，然后在左侧栏中选择<code>Serial</code>，我们接着配置串口参数。</font><br><font  size=4 >首先我们要我们的USB-TTL设备接在电脑的哪个位置，Linux系统中硬件统一存放在<code>/dev</code>中，我们在终端中输入<code>$ ls /dev/tty*</code>可以查看电脑连接的tty设备，我们的USB-TTL应该是<code>/dev/ttyUSBn</code>，<code>n</code>是数字，如果电脑上只连接了一个USB串口设备，n就是0。</font><br><img src="/2025/02/13/2k0300-putty-serial-connect/ttyUSB0.png" class="" title="UI" style="zoom:100%;"><br><font  size=4 >找到USB串口连接的位置，复制粘贴到Putty中，接着按照下面这张图配置。</font><br><img src="/2025/02/13/2k0300-putty-serial-connect/serialsetting.png" class="" title="UI" style="zoom:100%;"></p><h2 id="2-字体设置"><a href="#2-字体设置" class="headerlink" title="2.字体设置"></a><font>2.字体设置</font></h2><p><font  size=4 >Putty默认的窗口字体太小，可以在<code>Window-Fonts</code>中调整。</font><br><img src="/2025/02/13/2k0300-putty-serial-connect/fonts_settings.png" class="" title="UI" style="zoom:100%;"></p><h2 id="3-保存预设"><a href="#3-保存预设" class="headerlink" title="3.保存预设"></a><font>3.保存预设</font></h2><p><font  size=4 >设置结束后返回<code>Session</code>界面，保存预设，下次使用只要load一下，不需要重复配置。</font><br><img src="/2025/02/13/2k0300-putty-serial-connect/sessionmenu.png" class="" title="UI" style="zoom:100%;"></p><h1 id="三、连接开发板"><a href="#三、连接开发板" class="headerlink" title="三、连接开发板"></a><font>三、连接开发板</font></h1><p><font  size=4 >将USB-TTL连接至开发板串口IO，再接个GND。在Putty中<code>Open</code>打开串口界面，将开发板供电，此时终端就会有开机信息输出，等待开机完成，我们登陆默认账号<code>root</code>，密码为空。</font><br><img src="/2025/02/13/2k0300-putty-serial-connect/linuxmenu.png" class="" title="UI" style="zoom:100%;"><br><font  size=4 >要关机的话输入<code>shutdown -h now</code>，等到没有输出就可以断电了。</font></p><p><font  size=4 >【本文完】</font><br><font  size=4 ></font></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>【嵌入式学习笔记】</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>【嵌入式】</tag>
+      
+      <tag>【龙芯久久派】</tag>
+      
+      <tag>【Linux】</tag>
+      
+      <tag>【串口】</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>久久派环境与内核</title>
+    <link href="/2025/02/12/basic-loongarch-environment/"/>
+    <url>/2025/02/12/basic-loongarch-environment/</url>
+    
+    <content type="html"><![CDATA[<p><font  size=4 > </font><br><font  size=4 >开始在不熟悉的平台上捣鼓陌生的设备，龙芯久久派WiFi版，在配置完环境后把步骤记录下来，为了方便以后重装系统什么的再搭建环境。</font><br><font  size=4 > </font></p><h1 id="一、基础工具"><a href="#一、基础工具" class="headerlink" title="一、基础工具"></a><font>一、基础工具</font></h1><p><font  size=4 >基础工具包括Git、Vim和CMake。</font></p><h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a><font>Git</font></h2><p><font  size=4 ><a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">如果您想通过二进制安装程序在 Linux 上安装基本的 Git 工具，通常可以通过发行版附带的包管理工具进行安装。如果您使用基于 Debian 的发行版（例如 Ubuntu），请尝试apt：</a></font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt install git</span><br></code></pre></td></tr></table></figure><p><font  size=4 >由于我们要用到的仓库使用了LFS(Large File Storage)，所以我们需要安装一下，不然会出现克隆下来的大文件只有几百字节的情况，那些文件都只是LFS指针。</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install git-lfs</span><br></code></pre></td></tr></table></figure><p><font  size=4 >使用<code>$ git lfs install</code>命令可以查看Git LFS是否安装成功，如果正确安装，则会提示<code>Git LFS initialized.</code>。</font></p><h2 id="Vim"><a href="#Vim" class="headerlink" title="Vim"></a><font>Vim</font></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt install vim</span><br></code></pre></td></tr></table></figure><h2 id="CMake"><a href="#CMake" class="headerlink" title="CMake"></a><font>CMake</font></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt install cmake-gui libncurses-dev bison flex make libncurses5-dev libssl-dev</span><br></code></pre></td></tr></table></figure><p><font  size=4 >这条命令安装了以下工具：</font><br><font  size=4 > 1. cmake-gui：CMake的图形用户界面，用于配置和生成构建系统。</font><br><font  size=4 > 2. libncurses-dev：ncurses库的开发文件，用于终端文本界面的开发。</font><br><font  size=4 > 3. bison：GNU的语法分析器生成器，用于解析文本输入。</font><br><font  size=4 > 4. flex：快速词法分析器生成器，通常与bison一起使用。</font><br><font  size=4 > 5. make：GNU make工具，用于自动化构建过程。</font><br><font  size=4 > 6. libncurses5-dev：ncurses库的旧版本开发文件。</font><br><font  size=4 > 7. libssl-dev：OpenSSL库的开发文件，用于加密和安全通信。</font></p><h1 id="二、交叉编译工具链配置"><a href="#二、交叉编译工具链配置" class="headerlink" title="二、交叉编译工具链配置"></a><font>二、交叉编译工具链配置</font></h1><h2 id="1-获取资料包"><a href="#1-获取资料包" class="headerlink" title="1.获取资料包"></a><font>1.获取资料包</font></h2><p><font  size=4 >使用下面这条命令克隆资料，完整大小6.7GB，在当前终端目录下可以找到<strong>Loongson-2K0300-99PAI</strong>目录。</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://cnb.cool/hex/loong/Loongson-2K0300-99PAI.git</span><br></code></pre></td></tr></table></figure><p><font  size=4 >这个步骤如果自己用浏览器上那个网站下载zip包可能会出现克隆的资料文件特别小，只有几百字节之类的LFS指针，具体内容可以去<a href="https://cnb.cool/hex/loong/Loongson-2K0300-99PAI">网站</a>看一下说明：</font></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs 网站说明"># 如果您是第一次使用 LFS，请根据 “如何安装 Git LFS？” 安装 LFS 支持<br># git 启用 lfs 钩子<br>git lfs install<br># clone<br>git clone https://cnb.cool/hex/loong/Loongson-2K0300-99PAI.git<br># 更新<br>git pull<br># 初始化并拉取 longson-ejtag 子模块<br># 如不需要 longson-ejtag 相关内容可以不用执行这一步<br>git submodule update --init --recursive<br></code></pre></td></tr></table></figure><h2 id="2-配置工具链"><a href="#2-配置工具链" class="headerlink" title="2.配置工具链"></a><font>2.配置工具链</font></h2><p><font  size=4 ><code>Loongson-2K0300-99PAI/久久派内核和LoongOS/gcc/</code>目录下有一个<strong>loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1.tar.xz</strong>压缩包，在当前目录下打开终端解压缩，名称可以使用Tab补全，解压后目录大小为两百多MB。</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">tar -xvf loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1.tar.xz</span><br></code></pre></td></tr></table></figure><p><font  size=4 >我们需要将解压缩的目录移动到<code>/opt/</code>目录下，这一操作需要sudo权限，不建议在图形界面操作。</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mv</span> loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1 /opt/</span><br></code></pre></td></tr></table></figure><p><font  size=4 >在 Linux 系统中，<code>/opt/</code>目录是一个用于安装第三方应用程序的目录。它的名称来源于 “optional”，表示这些应用程序是可选的，而不是系统运行所必需的。将第三方软件安装在<code>/opt/</code>中，可以避免与系统自带的软件包冲突，保持系统的整洁。同时这种结构非常便于管理，卸载或更新软件更加方便，只需删除或替换对应的子目录即可。</font><br><font  size=4 >下面是<code>/opt/</code>的目录树：</font></p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Tree">/opt/<br>└── software_name/<br>    ├── bin/            # 可执行文件<br>    ├── lib/            # 库文件<br>    ├── etc/            # 配置文件<br>    ├── doc/            # 文档<br>    └── ...             # 其他文件<br></code></pre></td></tr></table></figure><h2 id="3-配置环境变量"><a href="#3-配置环境变量" class="headerlink" title="3.配置环境变量"></a><font>3.配置环境变量</font></h2><p><font  size=4 >接着，我们要添加<code>loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1/bin</code>的位置到环境变量</font><br><font  size=4 >先将<strong>enviroment</strong>文件提升权限：</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chmod</span> 777 /etc/environment</span><br></code></pre></td></tr></table></figure><p><font  size=4 >接着使用<code>nano</code>或<code>vim</code>编辑<code>enviroment</code>文件，在PATH末尾添加<code>:/opt/loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1/bin</code>，注意不要添加到双引号外面。保存之后使用<code>$ source /etc/environment</code>命令载入文件。在终端中输入<code>loong</code>，然后按Tab自动补全，如果能补全<code>loongarch64-linux-gnu-</code>则表示交叉编译的环境已经配置完成，输入<code>$ loongarch64-linux-gnu-gcc -v</code>可查看gcc的版本。编辑完环境建议重启一下，不然可能会遇到重新开个终端就又读不到gcc版本的情况，如果暂时不想重启，可以在终端里重新<code>$ source /etc/environment</code>一下，接着在这个终端下就能正常用了。</font></p><h1 id="三、编译龙芯2K0300内核"><a href="#三、编译龙芯2K0300内核" class="headerlink" title="三、编译龙芯2K0300内核"></a><font>三、编译龙芯2K0300内核</font></h1><h2 id="旧世界与新世界"><a href="#旧世界与新世界" class="headerlink" title="旧世界与新世界"></a><font>旧世界与新世界</font></h2><p><font  size=4 >查找资料的时候经常看有人提到“新世界”，好奇查了一下，发现Loongarch生态是有两种的，官方称为<strong>ABI1.0</strong>和<strong>ABI2.0</strong>。两个世界互不兼容，具体内容参考<a href="https://areweloongyet.com/docs/old-and-new-worlds/">这个文章</a>，久久派的内核是旧世界。</font></p><h2 id="1-解压内核源码"><a href="#1-解压内核源码" class="headerlink" title="1.解压内核源码"></a><font>1.解压内核源码</font></h2><p><font  size=4 >找到资料包<code>Loongson-2K0300-99PAI/久久派内核和LoongOS/内核源码和LoongOS安装文件/ABI1.0/内核源码/</code>目录下的<strong>linux-4.19-0802.tar.gz</strong>压缩包，解压后九百多MB，这就是内核源码，进入解压出来的目录。</font></p><h2 id="2-修改Makefile文件"><a href="#2-修改Makefile文件" class="headerlink" title="2.修改Makefile文件"></a><font>2.修改Makefile文件</font></h2><p><font  size=4 >我们在这个目录下找到<strong>Makefile</strong>，双击打开，如果之前安装了Vim，那现在应该在Vim的终端里。在这个文件的最上方添加这两行：</font></p><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Vim">ARCH=loongarch<br>CROSS_COMPILE=loongarch64-linux-gnu-<br></code></pre></td></tr></table></figure><p><font  size=4 >保存后退出。</font></p><h2 id="3-编译内核"><a href="#3-编译内核" class="headerlink" title="3.编译内核"></a><font>3.编译内核</font></h2><p><font  size=4 >将<code>linux-4.19/arch/loongarch/configs</code>目录下的<code>loongson_2k300_defconfig</code>文件复制到源码根目录，然后在根目录中打开终端，执行<code>$ make menuconfig</code>命令，会进入这个界面：</font><br><img src="/2025/02/12/basic-loongarch-environment/menuconfig.png" class="" title="UI" style="zoom:100%;"><br><font  size=4 >选择下方的Save，接着会让配置一个文件名称，直接使用默认的就行，退回主界面之后连续按俩下ESC退出。</font><br><font  size=4 >编译内核需要自行选择多少线程，在物理机中CPU有多少核心就能有多少线程，在虚拟机中核心数由自己配置；使用<code>$ nproc</code>命令查看有多少线程。</font><br><font  size=4 >在内核源码根目录使用<code>$ make vmlinuz -j10</code>进行内核编译，其中<code>-j10</code>中的参数不大于最大线程数就行。</font><br><font  size=4 >编译结束后内核源码根目录下的<strong>vmlinuz</strong>文件就是编译好的内核。把<strong>vmlinuz</strong>文件放入开发板<code>/boot</code>目录，然后使用<code>chmod</code>命令提高文件权限，重启开发板后修改的内容就生效了。(第一次改ADC的时候不知道要提高权限，死活不生效)</font></p><p><font  size=4 >【本文完】</font><br><font  size=4 > </font></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>【嵌入式学习笔记】</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>【嵌入式】</tag>
+      
+      <tag>【龙芯久久派】</tag>
+      
+      <tag>【Linux】</tag>
+      
+      <tag>【Loongarch】</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>SFML编写基础窗口</title>
+    <link href="/2024/11/29/SFML-Learning1/"/>
+    <url>/2024/11/29/SFML-Learning1/</url>
+    
+    <content type="html"><![CDATA[<p><font face="微软雅黑" size=4 > </font></p><h1 id="心血来潮"><a href="#心血来潮" class="headerlink" title="心血来潮"></a><font face="微软雅黑" >心血来潮</font></h1><p><font face="微软雅黑" size=4 >之前去扬州比赛的时候，晚上刷B站看到UP主“英雄哪里出来”的一个视频《3D游戏到底是怎么做出来的？》，里面用到了一个SFML的库，感觉还挺有意思的，前两天又刷到了他用pygame写的植物大战僵尸视频，突然想起了我高中时候也用pygame写过一个半成品游戏，心血来潮想把它用C++重写(笑)。</font><br><font face="微软雅黑" size=4 >笔记本上的VS 2022还是大一写C语言作业用的，课上完了就一直在吃灰，虽然重装过好多次系统，但好像每次都会装一下它（但根本用不到），跟着UP主的视频把库配置了一下，然后自己搞了一晚上+第二天半个下午，到写这日志（2024&#x2F;11&#x2F;29）的时候为止，开发进度如图：</font><br><font face="微软雅黑" size=4 > </font><br><img src="/2024/11/29/SFML-Learning1/basic_pic.png" class="" title="目前状况" style="zoom:100%;"><br><font face="微软雅黑" size=4 > </font><br><font face="微软雅黑" size=4 >一个800x600的窗口，不可调整大小；窗口显示了一张图片；设计了窗口左上角图标、exe文件图标（图标用的是我之前python游戏里的资产），由于我“既要、又要”的心态，库配置完之后就开始瞎搞，莫名其妙踩了不少坑，同时也认识到自己学的东西确实太少了，也考虑到自己以后用的时候有个参考，所以写一下避坑和配置步骤。</font><br><font face="微软雅黑" size=4 > </font></p><h1 id="Visual-Studio-配置"><a href="#Visual-Studio-配置" class="headerlink" title="Visual Studio 配置"></a><font face="微软雅黑" >Visual Studio 配置</font></h1><p><font face="微软雅黑" size=4 >我经常对Keil 5的编译器配置乱调，所以VS调什么还是能看懂一点的(笑)，先去<a href="https://www.sfml-dev.org/">SFML官网</a>下载适合自己VS的SFML库，我选的是“Visual C++ 17 (2022) - 64 位”。</font></p><h2 id="官方配置教程"><a href="#官方配置教程" class="headerlink" title="官方配置教程"></a><font face="微软雅黑" >官方配置教程</font></h2><p><font face="微软雅黑" size=4 >SFML官方给了配合VS使用的教程：<a href="https://www.sfml-dev.org/tutorials/2.6/start-vc.php">SFML and Visual Studio</a>，但不是很全，其中配置Linker的地方写得模棱两可，只是说需要用到什么就给什么，但我作为新手可就头疼了(笑)，所以我根据B站看到的那个视频+查资料+瞎摸索配置了一套。</font><br><font face="微软雅黑" size=4 > </font></p><h2 id="我的配置方式"><a href="#我的配置方式" class="headerlink" title="我的配置方式"></a><font face="微软雅黑" >我的配置方式</font></h2><h3 id="新建VS项目"><a href="#新建VS项目" class="headerlink" title="新建VS项目"></a><font face="微软雅黑" >新建VS项目</font></h3><p><font face="微软雅黑" size=4 >首先在VS 2022中创建一个空项目模板的工程，将下载好的SFML库丢进工程目录下，接下来所有设置都由我自己配置</font><br><font face="微软雅黑" size=4 > </font><br><img src="/2024/11/29/SFML-Learning1/empty_project.png" class="" title="空项目" style="zoom:100%;" ><br><font face="微软雅黑" size=4 > </font><br><font face="微软雅黑" size=4 >接着，在VS的解决方案资源管理器中先新建一个.cpp源文件（一定要先创建一个.cpp文件），然后再右键工程，打开属性卡。</font><br><font face="微软雅黑" size=4 > </font><br><img src="/2024/11/29/SFML-Learning1/project_property.png" class="" title="工程属性" style="zoom:70%;"><br><font face="微软雅黑" size=4 > </font><br><font face="微软雅黑" size=4 >在“C&#x2F;C++ - 常规”中的“附加包含目录”里添加SFML库目录下的include目录，如果没有找到“C&#x2F;C++”，回到上一步，要先创建cpp文件才有这个条目。</font><br><font face="微软雅黑" size=4 > </font><br><img src="/2024/11/29/SFML-Learning1/c_c++.png" class="" title="C/C++附加目录" style="zoom:100%;" ><br><font face="微软雅黑" size=4 > </font><br><font face="微软雅黑" size=4 >如果使用Windows explorer定义目录，那默认是绝对路径，虽然可以用，但是工程换一个地方存储就不能用了，所以我把它换成了相对路径，相对于工程根目录，最前面用“.&#x2F;”，这里一开始没搞明白没加最前面那个点，一直在报错(笑)。</font></p><p><font face="微软雅黑" size=4 >【未完】</font><br><font face="微软雅黑" size=4 > </font></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>【SFML学习笔记】</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>【C/C++】</tag>
+      
+      <tag>【SFML】</tag>
+      
+      <tag>【Visual Studio】</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hexo-Chic问题日志</title>
+    <link href="/2024/09/08/Hexo-Chic-Problems/"/>
+    <url>/2024/09/08/Hexo-Chic-Problems/</url>
+    
+    <content type="html"><![CDATA[<p><font face="微软雅黑" size=4 > </font></p><p><font face="微软雅黑" size=4 >搭建这个博客的时候还是一个大一菜鸟，没接触过HTML、Web开发之类的，Git也不会用，那自然这个博客自定义起来也是困难重重了(笑)，而且我选择的这个Chic主题还比较简约，很多非必要功能就直接不做了，这点我倒是很认可作者<a href="https://github.com/Siricee">Siricee</a>在<a href="https://siricee.github.io/hexo-theme-Chic/2019/06/05/backreview_hexo_theme_Chic/">示例博客</a>中所说的**“绝不会让设计为功能让步”**。但是各处都需要我自己修改，这肯定很麻烦(笑)。本文总结我遇到过的相关问题。</font></p><h1 id="generate问题"><a href="#generate问题" class="headerlink" title="generate问题"></a><font>generate问题</font></h1><h2 id="2024-09-08"><a href="#2024-09-08" class="headerlink" title="2024&#x2F;09&#x2F;08"></a><font>2024&#x2F;09&#x2F;08</font></h2><p><font face="微软雅黑"  >这类问题真的很玄学，即使到今天我还是只能通过不断<code>hexo clean</code>再<code>hexo g</code>解决。</font></p><h2 id="部署后无改变"><a href="#部署后无改变" class="headerlink" title="部署后无改变"></a><font>部署后无改变</font></h2><p><font face="微软雅黑" size=4 > </font></p><table><thead><tr><th><img src="/2024/09/08/Hexo-Chic-Problems/github%E9%83%A8%E7%BD%B2.png" alt="GitHub部署"></th><th><img src="/2024/09/08/Hexo-Chic-Problems/localhost.png" alt="localhost部署"></th></tr></thead></table><p><font face="微软雅黑" size=4 >比如上面这两张图，我修改了代码，想让归档页面的字体大一点。左边是generate后部署到GitHub Page后呈现的界面，右边是localhost时呈现的界面，截取像素面积是一样的，明显看出来GitHub部署的页面字体特别小，但问题是不论我怎么改都无济于事！localhost会随着我修改代码而改变，GitHub部署的页面纹丝不动！</font></p><p><font face="微软雅黑" size=4 >修改正文右侧的目录标签的时候也遇到相同的问题，虽然修改了行宽，部署的页面却一直没有改变。</font></p><p><font face="微软雅黑" size=4 >经过一段时间的尝试，我发现在<code>theme</code>目录下编辑的一些东西生成时不会立刻改变，我的解决办法就是使用<code>hexo clean</code>清除生成的目录，再<code>hexo g</code>生成一遍后部署，才有可能正常。</font></p><h2 id="文件geneerate后错位"><a href="#文件geneerate后错位" class="headerlink" title="文件geneerate后错位"></a><font>文件geneerate后错位</font></h2><p><font face="微软雅黑" size=4 >我在写第二篇博客的时候需要配图，源图片是放在<code>../source/_post/文章文件同名文件夹/</code>下的，生成的时候应该生成到对应的目录下的，但是我在generate的时候却生成到了上一篇博客的目录下，并且文件名称还少了几个字母，拿这篇博客使用的图片举例，我放在源目录下的文件名为<code>github部署.png</code>，生成错位的目录下就变成了<code>thub部署.png</code>，我尝试过删掉文件、重新命名等一系列方法都无效，最后还是<code>hexo clean</code>再<code>hexo g</code>才解决。</font><br><font face="微软雅黑" size=4 >我不知道这是不是只有我一个人遇到过，不过我确实可以稳定触发这个问题，只要我往我的相应post添加图像文件，直接generate出来都会出现这种错位情况：</font><br><font face="微软雅黑" size=4 > </font><br><img src="/2024/09/08/Hexo-Chic-Problems/example.png" class="" title="example" style="zoom:100%;"><br><font face="微软雅黑" size=4 > </font><br><font face="微软雅黑" size=4 color=#00A2E8 >（遇到问题慢慢写，有的时候懒瘾一犯就会无限制拖下去了(笑)）</font><br>&lt;font face&#x3D; size&#x3D;4 &gt;【最后编辑：2025&#x2F;02&#x2F;17】</font><br>&lt;font face&#x3D; size&#x3D;4 &gt;</font></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>【MrWei95博客日志】</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>【Web】</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>L298N电机驱动模块</title>
+    <link href="/2024/09/02/L298N-USE/"/>
+    <url>/2024/09/02/L298N-USE/</url>
+    
+    <content type="html"><![CDATA[<p><font face="微软雅黑" size=4 > </font><br><font face="微软雅黑" size=4 >L298N是一个常见的电机驱动模块，也是我学习嵌入式的过程中使用的第一种此类型模块。本文将以当时作为初学者的我的视角讲解该模块。</font></p><img src="/2024/09/02/L298N-USE/L298N_Looklike.png" class="" title="L298N" style="zoom:60%;"><h1 id="模块的引脚"><a href="#模块的引脚" class="headerlink" title="模块的引脚"></a><font face="微软雅黑" >模块的引脚</font></h1><img src="/2024/09/02/L298N-USE/L298N_Pinout.png" class="" title="Pin" style="zoom:100%;"><h2 id="电源端口"><a href="#电源端口" class="headerlink" title="电源端口"></a><font face="微软雅黑" >电源端口</font></h2><p><font face="微软雅黑" size=4 >首先看到模块右下角三个蓝色的接线端子，分别是“+12V”、“GND”和“+5V”，这三个端子是整个模块的供电端。“+12V”为输入正极，“GND”接地，这两个很好理解，但这“+5V”是个什么玩意儿？大家仔细看我在“+5V”端口旁边写的标注，它既可以输入又可以输出，这是什么意思呢？其实它究竟是输入还是输出，取决于“+12V”输入口输入的电压，并且跟这三个端子旁我画绿框的跳线帽有关。</font></p><h3 id="“-12V”端口输入电压低于12V"><a href="#“-12V”端口输入电压低于12V" class="headerlink" title="“+12V”端口输入电压低于12V"></a><font face="微软雅黑" >“+12V”端口输入电压低于12V</font></h3><p><font face="微软雅黑" size=4 >此时绿框跳线帽应接上，输入电压给模块的芯片供电，并且以电源电压输出给电机。这种情况下，“+5V”端口是输出端，输出+5V，可以给其他设备供电(如需供电，请共用GND)</font></p><h3 id="“-12V”端口输入电压高于12V"><a href="#“-12V”端口输入电压高于12V" class="headerlink" title="“+12V”端口输入电压高于12V"></a><font face="微软雅黑" >“+12V”端口输入电压高于12V</font></h3><p><font face="微软雅黑" size=4 >大电压可能会损坏内置的7805稳压芯片，所以此时应拔掉绿框跳线帽，12V以上电压用于驱动电机，“+5V”端口应输入5V给模块芯片供电，同时应共GND。</font></p><h2 id="OUT输出口"><a href="#OUT输出口" class="headerlink" title="OUT输出口"></a><font face="微软雅黑" >OUT输出口</font></h2><p><font face="微软雅黑" size=4 >OUT1和OUT2(组1)、OUT3和OUT4(组2)是两对输出引脚，它们直接连接电机的驱动引脚，它们输出0或1。我们知道，只有回路中有电流电机才能转，所以OUT1和OUT2中输出的信号必须不同电机才能转，如果我们把两个引脚信号都翻转一下，电机就会反转；同时，如果两个引脚都输出0或1，那么电机就不会转。</font></p><h2 id="IN输出口"><a href="#IN输出口" class="headerlink" title="IN输出口"></a><font face="微软雅黑" >IN输出口</font></h2><p><font face="微软雅黑" size=4 >输入口IN1和IN2(组1)、IN3和IN4(组2)为两对输入引脚，可用单片机控制，拿组1来说，IN口的输入信号对应OUT口的输出信号，信号相反电机转、信号翻转电机反转、信号相同电机不转。但是L298N仅仅凭IN口输入信号是无法控制电机旋转的，还需要使能。</font></p><h2 id="EN使能口"><a href="#EN使能口" class="headerlink" title="EN使能口"></a><font face="微软雅黑" >EN使能口</font></h2><p><font face="微软雅黑" size=4 >在IN输入口两侧有两个使能端口，使能的意思就是给它能量，其反义词为失能。EN端口在这里控制OUT是否输出信号，ENA和ENB分别控制两侧。若IN1给1、IN2给0，但ENA不给信号，那么OUT1、2就不会有输出，ENB同理。我用蓝色箭头引出ENB的跳线端，这里可以看到左侧是一个+5V的输出，我们拿到一个新的L298N时跳线帽默认是接上的，也就是说上电之后5V电压就会给到使能口，只要你接上电源再控制输入口就可以让电机旋转了。</font><br><font face="微软雅黑" size=4 >但如果我希望使用PWM对电机调速，那么只能控制输入端的信号，我手头现成给LED调光的代码就没法直接用了。此时我们就可以拆掉使能口的跳线帽，让单片机给它信号使能，这样代码中实际翻转的就只有ENA、ENB这两个变量，控制电机正转反转的代码就可以写在别的地方了。</font></p><h1 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a><font face="微软雅黑" >示例代码</font></h1><p><font face="微软雅黑" size=4 >我们以51单片机为例写一下控制代码，用于控制一个三轮小车运动。(两个传动轮，一个万向轮)<br>要有PWM输出，首先我们需要开启一个定时器，我们这里开启定时器0，周期设为100毫秒：</font></p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-type">void</span> <span class="hljs-title function_">Timer0_Init</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span><br>&#123;<br><span class="hljs-comment">// 初始化代码</span><br><span class="hljs-comment">// ......</span><br>ET0 = <span class="hljs-number">1</span> ;<br>EA = <span class="hljs-number">1</span> ;<br>PT0 = <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure><p><font face="微软雅黑" size=4 >然后我们写一下终端函数代码，由于我们选择使能口控制电机是否旋转，所以这里的PWM只需要翻转ENA和ENB控制口：</font></p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs C"><span class="hljs-type">void</span> <span class="hljs-title function_">Timer0_Routine</span><span class="hljs-params">()</span> interrupt 1<br>&#123;<br>TL0 = <span class="hljs-number">0xA4</span>;<span class="hljs-comment">// 设置定时初值</span><br>TH0 = <span class="hljs-number">0xFF</span>;<span class="hljs-comment">// 设置定时初值</span><br><br>Counter++;<br><br><span class="hljs-keyword">if</span> (Counter&lt;PWMA) &#123;ENL = <span class="hljs-number">1</span>;&#125;<span class="hljs-comment">// 左轮使能端口打开</span><br><span class="hljs-keyword">else</span> &#123;ENA = <span class="hljs-number">0</span>;&#125;<span class="hljs-comment">// 左轮使能端口关闭</span><br><br><span class="hljs-keyword">if</span> (Counter&lt;PWMB) &#123;ENR = <span class="hljs-number">1</span>;&#125;<span class="hljs-comment">// 右轮使能端口打开</span><br><span class="hljs-keyword">else</span> &#123;ENB = <span class="hljs-number">0</span>;&#125;<span class="hljs-comment">// 右轮使能端口关闭</span><br><br>Counter%=<span class="hljs-number">100</span>;<span class="hljs-comment">// 计数值变化范围限制在0~99</span><br>&#125;<br></code></pre></td></tr></table></figure><p><font face="微软雅黑" size=4 >到这里我们PWM部分就结束了，剩下的就是给控制IN口的引脚0或1的信号，这样小车就可以按照预定速度(与定时器中的PWM预定值有关)行驶了。添加相关控制代码就可以控制小车转向了！</font></p><p><font face="微软雅黑" size=4 >【本文完】</font></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>【嵌入式学习笔记】</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>【嵌入式】</tag>
+      
+      <tag>【C/C++】</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Android设备备份字库</title>
+    <link href="/2024/08/16/Backup-Flash-Memory/"/>
+    <url>/2024/08/16/Backup-Flash-Memory/</url>
+    
+    <content type="html"><![CDATA[<h1 id="玩机有风险，刷机需谨慎！！！"><a href="#玩机有风险，刷机需谨慎！！！" class="headerlink" title="玩机有风险，刷机需谨慎！！！"></a><font face="微软雅黑" color=#FF000 >玩机有风险，刷机需谨慎！！！</font></h1><p><font face="微软雅黑" size=4 >本文将带你学会如何备份Android设备的字库文件(包含基带)。</font></p><p><font face="微软雅黑" size=4 >如需观看视频教程可跳转<a href="https://www.bilibili.com/video/BV1bje8eVEjK/">本人视频</a>，文章、视频如有错误，欢迎指出！</font></p><h1 id="什么是字库，为什么要备份字库？"><a href="#什么是字库，为什么要备份字库？" class="headerlink" title="什么是字库，为什么要备份字库？"></a><font face="微软雅黑" >什么是字库，为什么要备份字库？</font></h1><p><font face="微软雅黑" size=4 >字库可以简单理解为Android设备的分区。刷机时也会刷入分区，但刷入不完整。如果设备刚好是其他分区损坏了，那么即使线刷完整包也无法修复。所以为了预防特殊分区损坏、也为了预防不小心刷入格机模块(rm -rf &#x2F;)，玩机前我们需要自行备份Android设备的字库文件。</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Shell">基带分区<br>高通机型：fsg，fsc，modemst1，modemst2<br>联发科机型：nvram，nvdata，nvcfg，persist，protect1，protect2，seccfg<br></code></pre></td></tr></table></figure><p><font face="微软雅黑" size=4 color=#FF000 >请注意！！！如果是高通机型，可直接使用本文的命令，如果是联发科机型，请将下面命令中的<code>/dev/block/bootdevice/by-name</code>修改为<code>/dev/block/by-name</code></font></p><h1 id="备份字库"><a href="#备份字库" class="headerlink" title="备份字库"></a><font face="微软雅黑" >备份字库</font></h1><p><font face="微软雅黑" size=3 color=#FF000 >本文使用的方法是手动在Shell中键入指令以达成备份字库的目的，酷安上有教程可在手机上直接执行备份和恢复，写的很好，但本人认为恢复部分有些许问题，因此不采用这种方法。缘由我已经在视频里说了，所以不要再在我视频评论区里说什么“XXX直接秒”之类的了，等你需要恢复字库的时候手机屏幕都不一定亮得起来。</font></p><h2 id="备份的前提条件"><a href="#备份的前提条件" class="headerlink" title="备份的前提条件"></a><font face="微软雅黑" >备份的前提条件</font></h2><h3 id="·-设备需获取Root权限"><a href="#·-设备需获取Root权限" class="headerlink" title="· 设备需获取Root权限"></a><font face="微软雅黑" >· 设备需获取Root权限</font></h3><p><font face="微软雅黑" size=4 >我选择使用Magisk获取Root权限，获取方式参考<a href="http://www.bilibili.com/video/BV17aY9e4E9o/">我的视频</a>。当然，如果你没有获取Root权限，或者说连Bootloader锁都没有解开，那也没有必要备份字库，正常用就行，多一事不如少一事。</font></p><h3 id="·-开启设备的USB调试"><a href="#·-开启设备的USB调试" class="headerlink" title="· 开启设备的USB调试"></a><font face="微软雅黑" >· 开启设备的USB调试</font></h3><p><font face="微软雅黑" size=4 >在开发者选项中打开。</font></p><h3 id="·-在Android至少预留20GB可用空间"><a href="#·-在Android至少预留20GB可用空间" class="headerlink" title="· 在Android至少预留20GB可用空间"></a><font face="微软雅黑" >· 在Android至少预留20GB可用空间</font></h3><p><font face="微软雅黑" size=4 >现代Android设备分区很多，占用空间也很大，本人的小米平板6(pipa)备份文件大约十几GB。</font></p><h3 id="·-给予Shell以Root权限"><a href="#·-给予Shell以Root权限" class="headerlink" title="· 给予Shell以Root权限"></a><font face="微软雅黑" >· 给予Shell以Root权限</font></h3><p><font face="微软雅黑" size=4 > 将设备连接至电脑，在终端进入adb shell(需提前拥有platform-tools，如何安装参考<a href="http://www.bilibili.com/video/BV1KJ4m1u7or/">我的视频中安装驱动部分</a>。首次使用设备会提示“是否给予Root权限”，给予即可。指令如下：</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">adb shell<br>su<br></code></pre></td></tr></table></figure><h2 id="备份流程"><a href="#备份流程" class="headerlink" title="备份流程"></a><font face="微软雅黑" >备份流程</font></h2><h3 id="·-创建工作目录"><a href="#·-创建工作目录" class="headerlink" title="· 创建工作目录"></a><font face="微软雅黑" >· 创建工作目录</font></h3><p><font face="微软雅黑" size=4 >首先，我们在设备sdcard目录下创建一个用于存储备份字库的目录：</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir /sdcard/000_Backup<br></code></pre></td></tr></table></figure><p><font face="微软雅黑" size=4 >这个时候我们就可以在设备的文件浏览器看到这个目录生成了，当然，这一步也可以使用设备独立完成。</font></p><h3 id="·-读取设备的分区信息"><a href="#·-读取设备的分区信息" class="headerlink" title="· 读取设备的分区信息"></a><font face="微软雅黑" >· 读取设备的分区信息</font></h3><p><font face="微软雅黑" size=4 >在终端中输入以下命令，这里注意，我的指令中屏蔽了userdata和缓存分区(没有必要)。</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">ls -1 /dev/block/bootdevice/by-name | grep -ixvE &quot;userdata|cache&quot; | while IFS= read -r name; do echo &quot;dd if=/dev/block/bootdevice/by-name/$name of=/sdcard/000_Backup/$name.img&quot; &gt;&gt; /sdcard/000_Backup/001_Backup.sh; echo &quot;fastboot flash $name $name.img&quot; &gt;&gt; /sdcard/000_Backup/002_Restore.bat; done<br></code></pre></td></tr></table></figure><p><font face="微软雅黑" size=4 >执行完成后，000_Backup目录下会多出一个sh脚本和一个bat脚本，sh脚本用于读取备份，bat用于还原备份。</font></p><h3 id="·-执行备份脚本"><a href="#·-执行备份脚本" class="headerlink" title="· 执行备份脚本"></a><font face="微软雅黑" >· 执行备份脚本</font></h3><p><font face="微软雅黑" size=4 >我们使用001_Backup.sh脚本执行备份：</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sh /sdcard/000_Backup/001_Backup.sh<br></code></pre></td></tr></table></figure><p><font face="微软雅黑" size=4 >随后终端会显示备份的进度，耐心等待。</font></p><h3 id="·-创建MD5值表（可不看）"><a href="#·-创建MD5值表（可不看）" class="headerlink" title="· 创建MD5值表（可不看）"></a><font face="微软雅黑" >· 创建MD5值表（可不看）</font></h3><p><font face="微软雅黑" size=4 >备份完成后我们执行下面这条命令，它会计算我们备份出来的所有文件的MD5值并将其全部整理至003_MD5Hsah.txt这个文本中。</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd /sdcard/000_Backup &amp;&amp; md5sum * &gt; /sdcard/000_Backup/003_MD5Hsah.txt<br></code></pre></td></tr></table></figure><p><font face="微软雅黑" size=4 >备份MD5值是为了防止在存储过程中备份文件出现损坏，而我们浑然不知，将这个损坏的分区刷进手机导致出错。</font></p><p><font face="微软雅黑" size=4 >到这里基础备份工作就完成了！</font></p><h2 id="手动修改bat脚本（可不看）"><a href="#手动修改bat脚本（可不看）" class="headerlink" title="手动修改bat脚本（可不看）"></a><font face="微软雅黑" >手动修改bat脚本（可不看）</font></h2><p><font face="微软雅黑" size=4 >我们备份字库的目的就是还原那些刷机包中没有的分区文件，如果刷机包中包含某些文件，我们就没有必要还原，不然可能会导致版本冲突，并且浪费时间。我们可以修改bat脚本中的指令，使还原的时候不会恢复super等分区。</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sed -i -e &#x27;/ super.img/s/^/::/g&#x27; -e &#x27;/ system.img/s/^/::/g&#x27; -e &#x27;/ system_a.img/s/^/::/g&#x27; -e &#x27;/ system_b.img/s/^/::/g&#x27; -e &#x27;/ vendor.img/s/^/::/g&#x27; -e &#x27;/ vendor_a.img/s/^/::/g&#x27; -e &#x27;/ vendor_b.img/s/^/::/g&#x27; -e &#x27;/ mmcblk0.img/s/^/::/g&#x27; -e &#x27;/ sda.img/s/^/::/g&#x27; -e &#x27;/ sdb.img/s/^/::/g&#x27; -e &#x27;/ sdc.img/s/^/::/g&#x27; -e &#x27;/ sdd.img/s/^/::/g&#x27; -e &#x27;/ sde.img/s/^/::/g&#x27; -e &#x27;/ sdf.img/s/^/::/g&#x27; -e &#x27;/ sdg.img/s/^/::/g&#x27; /sdcard/000_Backup/002_Restore.bat<br></code></pre></td></tr></table></figure><p><font face="微软雅黑" size=4 >然后我们给它打包一下：</font></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd /sdcard &amp;&amp; tar -zcpvf PartitionBackup.tgz 000_Backup<br></code></pre></td></tr></table></figure><p><font face="微软雅黑" size=4 >等处理完，我们就可以在sdcard根目录下就可以看到PartitionBackup.tgz，我们将tgz压缩文件备份至电脑端，以后要用直接解压就很方便了。到此为止，备份工作结束，我们可以删除设备存储中的000_Backup目录，释放空间。</font></p><h1 id="恢复字库"><a href="#恢复字库" class="headerlink" title="恢复字库"></a><font face="微软雅黑" >恢复字库</font></h1><p><font face="微软雅黑" size=4 >当我们的设备分区损坏后，我们就可以通过我们备份的分区进行修复。我们只需要解压备份文件，将手机启动至Fastboot模式连接电脑，在终端执行我们备份文件中的002_Restore.bat脚本，我们备份的分区就会被写入设备，写完后我们再线刷一下官方线刷包，格式化data分区后就可以正常开机进系统了！</font><br><font face="微软雅黑" size=4 >如果批量恢复后设备系统还是有问题，可以尝试在fastboot模式下擦除某分区，然后手动刷入该分区的备份，当然这么做有很大的风险。</font></p><h2 id="擦除某分区"><a href="#擦除某分区" class="headerlink" title="擦除某分区"></a><font face="微软雅黑" size=4 >擦除某分区</font></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">fastboot erase 分区名称<br></code></pre></td></tr></table></figure><h2 id="刷写某分区"><a href="#刷写某分区" class="headerlink" title="刷写某分区"></a><font face="微软雅黑" size=4 >刷写某分区</font></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">fastboot flash 分区名称 用户刷写的文件路径<br></code></pre></td></tr></table></figure><p><font face="微软雅黑" size=4 >【本文完】</font><br><font face="微软雅黑" size=4 > </font><br><font face="微软雅黑" size=4 >参考资料：</font><br><font face="微软雅黑" size=4 ><a href="https://zh.wikipedia.org/wiki/%E9%97%AA%E5%AD%98">维基百科</a></font><br><font face="微软雅黑" size=4 ><a href="https://baike.baidu.com/item/%E6%89%8B%E6%9C%BA%E5%AD%97%E5%BA%93/5296009">百度百科</a></font><br><font face="微软雅黑" size=4 ><a href="https://miuiver.com/backup-phone-partition/">MIUI历史版本</a></font><br><font face="微软雅黑" size=4 ><a href="https://root99.cn/index.php/archives/438/">极客Root站</a></font></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>【Android玩机日志】</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>【Android】</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>First Step!</title>
+    <link href="/2024/08/15/hello-world/"/>
+    <url>/2024/08/15/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>一个大一菜鸟折腾了一个晚上搞了这个GitHub Page（不会用git），搞完了看到这个生成的Hello World文档，看它放这边总感觉别扭，就把它给改掉了(笑)。</p><h2 id="MrWei95的博客"><a href="#MrWei95的博客" class="headerlink" title="MrWei95的博客"></a>MrWei95的博客</h2><h3 id="分享我学习中遇到的有趣问题"><a href="#分享我学习中遇到的有趣问题" class="headerlink" title="分享我学习中遇到的有趣问题"></a>分享我学习中遇到的有趣问题</h3><h3 id="如果我B站视频有什么需要补充的-例如终端指令-，也会分享在这里"><a href="#如果我B站视频有什么需要补充的-例如终端指令-，也会分享在这里" class="headerlink" title="如果我B站视频有什么需要补充的(例如终端指令)，也会分享在这里"></a>如果我B站视频有什么需要补充的(例如终端指令)，也会分享在这里</h3><p>欢迎访问<a href="https://space.bilibili.com/2004315025">我的Bilibili主页</a>！</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>

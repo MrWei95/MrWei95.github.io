@@ -1,0 +1,677 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/">
+  <link rel="icon" href="/95_Logo.ico">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Tommy Wei">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="开始在不熟悉的平台上捣鼓陌生的设备，龙芯久久派WiFi版，在配置完环境后把步骤记录下来，为了方便以后重装系统什么的再搭建环境。  一、基础工具基础工具包括Git、Vim和CMake。 Git如果您想通过二进制安装程序在 Linux 上安装基本的 Git 工具，通常可以通过发行版附带的包管理工具进行安装。如果您使用基于 Debian 的发行版（例如 Ubuntu），请尝试apt： 1$ sudo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="久久派环境与内核">
+<meta property="og:url" content="https://mrwei95.github.io/2025/02/12/basic-loongarch-environment/index.html">
+<meta property="og:site_name" content="95的博客">
+<meta property="og:description" content="开始在不熟悉的平台上捣鼓陌生的设备，龙芯久久派WiFi版，在配置完环境后把步骤记录下来，为了方便以后重装系统什么的再搭建环境。  一、基础工具基础工具包括Git、Vim和CMake。 Git如果您想通过二进制安装程序在 Linux 上安装基本的 Git 工具，通常可以通过发行版附带的包管理工具进行安装。如果您使用基于 Debian 的发行版（例如 Ubuntu），请尝试apt： 1$ sudo">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mrwei95.github.io/2025/02/12/basic-loongarch-environment/menuconfig.png">
+<meta property="article:published_time" content="2025-02-12T06:58:55.000Z">
+<meta property="article:modified_time" content="2025-03-22T06:12:37.348Z">
+<meta property="article:author" content="Tommy Wei">
+<meta property="article:tag" content="【嵌入式】">
+<meta property="article:tag" content="【龙芯久久派】">
+<meta property="article:tag" content="【Linux】">
+<meta property="article:tag" content="【Loongarch】">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://mrwei95.github.io/2025/02/12/basic-loongarch-environment/menuconfig.png">
+  
+  
+  
+  <title>久久派环境与内核-95的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"mrwei95.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":20,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>MrWei95的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/post.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="久久派环境与内核"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-02-12 14:58" pubdate>
+          2025年2月12日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">久久派环境与内核</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><font  size=4 > </font><br><font  size=4 >开始在不熟悉的平台上捣鼓陌生的设备，龙芯久久派WiFi版，在配置完环境后把步骤记录下来，为了方便以后重装系统什么的再搭建环境。</font><br><font  size=4 > </font></p>
+<h1 id="一、基础工具"><a href="#一、基础工具" class="headerlink" title="一、基础工具"></a><font>一、基础工具</font></h1><p><font  size=4 >基础工具包括Git、Vim和CMake。</font></p>
+<h2 id="Git"><a href="#Git" class="headerlink" title="Git"></a><font>Git</font></h2><p><font  size=4 ><a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">如果您想通过二进制安装程序在 Linux 上安装基本的 Git 工具，通常可以通过发行版附带的包管理工具进行安装。如果您使用基于 Debian 的发行版（例如 Ubuntu），请尝试apt：</a></font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt install git</span><br></code></pre></td></tr></table></figure>
+<p><font  size=4 >由于我们要用到的仓库使用了LFS(Large File Storage)，所以我们需要安装一下，不然会出现克隆下来的大文件只有几百字节的情况，那些文件都只是LFS指针。</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install git-lfs</span><br></code></pre></td></tr></table></figure>
+<p><font  size=4 >使用<code>$ git lfs install</code>命令可以查看Git LFS是否安装成功，如果正确安装，则会提示<code>Git LFS initialized.</code>。</font></p>
+<h2 id="Vim"><a href="#Vim" class="headerlink" title="Vim"></a><font>Vim</font></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt install vim</span><br></code></pre></td></tr></table></figure>
+<h2 id="CMake"><a href="#CMake" class="headerlink" title="CMake"></a><font>CMake</font></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt install cmake-gui libncurses-dev bison flex make libncurses5-dev libssl-dev</span><br></code></pre></td></tr></table></figure>
+<p><font  size=4 >这条命令安装了以下工具：</font><br><font  size=4 > 1. cmake-gui：CMake的图形用户界面，用于配置和生成构建系统。</font><br><font  size=4 > 2. libncurses-dev：ncurses库的开发文件，用于终端文本界面的开发。</font><br><font  size=4 > 3. bison：GNU的语法分析器生成器，用于解析文本输入。</font><br><font  size=4 > 4. flex：快速词法分析器生成器，通常与bison一起使用。</font><br><font  size=4 > 5. make：GNU make工具，用于自动化构建过程。</font><br><font  size=4 > 6. libncurses5-dev：ncurses库的旧版本开发文件。</font><br><font  size=4 > 7. libssl-dev：OpenSSL库的开发文件，用于加密和安全通信。</font></p>
+<h1 id="二、交叉编译工具链配置"><a href="#二、交叉编译工具链配置" class="headerlink" title="二、交叉编译工具链配置"></a><font>二、交叉编译工具链配置</font></h1><h2 id="1-获取资料包"><a href="#1-获取资料包" class="headerlink" title="1.获取资料包"></a><font>1.获取资料包</font></h2><p><font  size=4 >使用下面这条命令克隆资料，完整大小6.7GB，在当前终端目录下可以找到<strong>Loongson-2K0300-99PAI</strong>目录。</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">git <span class="hljs-built_in">clone</span> https://cnb.cool/hex/loong/Loongson-2K0300-99PAI.git</span><br></code></pre></td></tr></table></figure>
+<p><font  size=4 >这个步骤如果自己用浏览器上那个网站下载zip包可能会出现克隆的资料文件特别小，只有几百字节之类的LFS指针，具体内容可以去<a target="_blank" rel="noopener" href="https://cnb.cool/hex/loong/Loongson-2K0300-99PAI">网站</a>看一下说明：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs 网站说明"># 如果您是第一次使用 LFS，请根据 “如何安装 Git LFS？” 安装 LFS 支持<br># git 启用 lfs 钩子<br>git lfs install<br># clone<br>git clone https://cnb.cool/hex/loong/Loongson-2K0300-99PAI.git<br># 更新<br>git pull<br># 初始化并拉取 longson-ejtag 子模块<br># 如不需要 longson-ejtag 相关内容可以不用执行这一步<br>git submodule update --init --recursive<br></code></pre></td></tr></table></figure>
+<h2 id="2-配置工具链"><a href="#2-配置工具链" class="headerlink" title="2.配置工具链"></a><font>2.配置工具链</font></h2><p><font  size=4 ><code>Loongson-2K0300-99PAI/久久派内核和LoongOS/gcc/</code>目录下有一个<strong>loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1.tar.xz</strong>压缩包，在当前目录下打开终端解压缩，名称可以使用Tab补全，解压后目录大小为两百多MB。</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">tar -xvf loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1.tar.xz</span><br></code></pre></td></tr></table></figure>
+<p><font  size=4 >我们需要将解压缩的目录移动到<code>/opt/</code>目录下，这一操作需要sudo权限，不建议在图形界面操作。</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mv</span> loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1 /opt/</span><br></code></pre></td></tr></table></figure>
+<p><font  size=4 >在 Linux 系统中，<code>/opt/</code>目录是一个用于安装第三方应用程序的目录。它的名称来源于 “optional”，表示这些应用程序是可选的，而不是系统运行所必需的。将第三方软件安装在<code>/opt/</code>中，可以避免与系统自带的软件包冲突，保持系统的整洁。同时这种结构非常便于管理，卸载或更新软件更加方便，只需删除或替换对应的子目录即可。</font><br><font  size=4 >下面是<code>/opt/</code>的目录树：</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Tree">/opt/<br>└── software_name/<br>    ├── bin/            # 可执行文件<br>    ├── lib/            # 库文件<br>    ├── etc/            # 配置文件<br>    ├── doc/            # 文档<br>    └── ...             # 其他文件<br></code></pre></td></tr></table></figure>
+<h2 id="3-配置环境变量"><a href="#3-配置环境变量" class="headerlink" title="3.配置环境变量"></a><font>3.配置环境变量</font></h2><p><font  size=4 >接着，我们要添加<code>loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1/bin</code>的位置到环境变量</font><br><font  size=4 >先将<strong>enviroment</strong>文件提升权限：</font></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chmod</span> 777 /etc/environment</span><br></code></pre></td></tr></table></figure>
+<p><font  size=4 >接着使用<code>nano</code>或<code>vim</code>编辑<code>enviroment</code>文件，在PATH末尾添加<code>:/opt/loongson-gnu-toolchain-8.3-x86_64-loongarch64-linux-gnu-rc1.3-1/bin</code>，注意不要添加到双引号外面。保存之后使用<code>$ source /etc/environment</code>命令载入文件。在终端中输入<code>loong</code>，然后按Tab自动补全，如果能补全<code>loongarch64-linux-gnu-</code>则表示交叉编译的环境已经配置完成，输入<code>$ loongarch64-linux-gnu-gcc -v</code>可查看gcc的版本。编辑完环境建议重启一下，不然可能会遇到重新开个终端就又读不到gcc版本的情况，如果暂时不想重启，可以在终端里重新<code>$ source /etc/environment</code>一下，接着在这个终端下就能正常用了。</font></p>
+<h1 id="三、编译龙芯2K0300内核"><a href="#三、编译龙芯2K0300内核" class="headerlink" title="三、编译龙芯2K0300内核"></a><font>三、编译龙芯2K0300内核</font></h1><h2 id="旧世界与新世界"><a href="#旧世界与新世界" class="headerlink" title="旧世界与新世界"></a><font>旧世界与新世界</font></h2><p><font  size=4 >查找资料的时候经常看有人提到“新世界”，好奇查了一下，发现Loongarch生态是有两种的，官方称为<strong>ABI1.0</strong>和<strong>ABI2.0</strong>。两个世界互不兼容，具体内容参考<a target="_blank" rel="noopener" href="https://areweloongyet.com/docs/old-and-new-worlds/">这个文章</a>，久久派的内核是旧世界。</font></p>
+<h2 id="1-解压内核源码"><a href="#1-解压内核源码" class="headerlink" title="1.解压内核源码"></a><font>1.解压内核源码</font></h2><p><font  size=4 >找到资料包<code>Loongson-2K0300-99PAI/久久派内核和LoongOS/内核源码和LoongOS安装文件/ABI1.0/内核源码/</code>目录下的<strong>linux-4.19-0802.tar.gz</strong>压缩包，解压后九百多MB，这就是内核源码，进入解压出来的目录。</font></p>
+<h2 id="2-修改Makefile文件"><a href="#2-修改Makefile文件" class="headerlink" title="2.修改Makefile文件"></a><font>2.修改Makefile文件</font></h2><p><font  size=4 >我们在这个目录下找到<strong>Makefile</strong>，双击打开，如果之前安装了Vim，那现在应该在Vim的终端里。在这个文件的最上方添加这两行：</font></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Vim">ARCH=loongarch<br>CROSS_COMPILE=loongarch64-linux-gnu-<br></code></pre></td></tr></table></figure>
+<p><font  size=4 >保存后退出。</font></p>
+<h2 id="3-编译内核"><a href="#3-编译内核" class="headerlink" title="3.编译内核"></a><font>3.编译内核</font></h2><p><font  size=4 >将<code>linux-4.19/arch/loongarch/configs</code>目录下的<code>loongson_2k300_defconfig</code>文件复制到源码根目录，然后在根目录中打开终端，执行<code>$ make menuconfig</code>命令，会进入这个界面：</font><br><img src="/2025/02/12/basic-loongarch-environment/menuconfig.png" srcset="/img/loading.gif" lazyload class="" title="UI" style="zoom:100%;"><br><font  size=4 >选择下方的Save，接着会让配置一个文件名称，直接使用默认的就行，退回主界面之后连续按俩下ESC退出。</font><br><font  size=4 >编译内核需要自行选择多少线程，在物理机中CPU有多少核心就能有多少线程，在虚拟机中核心数由自己配置；使用<code>$ nproc</code>命令查看有多少线程。</font><br><font  size=4 >在内核源码根目录使用<code>$ make vmlinuz -j10</code>进行内核编译，其中<code>-j10</code>中的参数不大于最大线程数就行。</font><br><font  size=4 >编译结束后内核源码根目录下的<strong>vmlinuz</strong>文件就是编译好的内核。把<strong>vmlinuz</strong>文件放入开发板<code>/boot</code>目录，然后使用<code>chmod</code>命令提高文件权限，重启开发板后修改的内容就生效了。(第一次改ADC的时候不知道要提高权限，死活不生效)</font></p>
+<p><font  size=4 >【本文完】</font><br><font  size=4 > </font></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91/" class="category-chain-item">【嵌入式学习笔记】</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E3%80%90%E5%B5%8C%E5%85%A5%E5%BC%8F%E3%80%91/" class="print-no-link">#【嵌入式】</a>
+      
+        <a href="/tags/%E3%80%90%E9%BE%99%E8%8A%AF%E4%B9%85%E4%B9%85%E6%B4%BE%E3%80%91/" class="print-no-link">#【龙芯久久派】</a>
+      
+        <a href="/tags/%E3%80%90Linux%E3%80%91/" class="print-no-link">#【Linux】</a>
+      
+        <a href="/tags/%E3%80%90Loongarch%E3%80%91/" class="print-no-link">#【Loongarch】</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>久久派环境与内核</div>
+      <div>https://mrwei95.github.io/2025/02/12/basic-loongarch-environment/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Tommy Wei</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年2月12日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2025年3月22日</div>
+        </div>
+      
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/02/13/2k0300-putty-serial-connect/" title="久久派串口连接(Linux)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">久久派串口连接(Linux)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/11/29/SFML-Learning1/" title="SFML编写基础窗口">
+                        <span class="hidden-mobile">SFML编写基础窗口</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
