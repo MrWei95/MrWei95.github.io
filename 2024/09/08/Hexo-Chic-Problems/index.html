@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://mrwei95.github.io/2024/09/08/Hexo-Chic-Problems/Poster.png">
 <meta property="article:published_time" content="2024-09-08T07:22:47.000Z">
-<meta property="article:modified_time" content="2025-03-31T15:24:54.926Z">
+<meta property="article:modified_time" content="2025-03-31T15:33:59.732Z">
 <meta property="article:author" content="Tommy Wei">
 <meta property="article:tag" content="【Web】">
 <meta name="twitter:card" content="summary_large_image">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          681 字
+          667 字
         
       </span>
     
@@ -293,7 +293,8 @@
 <p><font face="微软雅黑" size=4 >比如上面这两张图，我修改了代码，想让归档页面的字体大一点。左边是generate后部署到GitHub Page后呈现的界面，右边是localhost时呈现的界面，截取像素面积是一样的，明显看出来GitHub部署的页面字体特别小，但问题是不论我怎么改都无济于事！localhost会随着我修改代码而改变，GitHub部署的页面纹丝不动！</font></p>
 <p><font face="微软雅黑" size=4 >修改正文右侧的目录标签的时候也遇到相同的问题，虽然修改了行宽，部署的页面却一直没有改变。</font></p>
 <p><font face="微软雅黑" size=4 >经过一段时间的尝试，我发现在<code>theme</code>目录下编辑的一些东西生成时不会立刻改变，我的解决办法就是使用<code>hexo clean</code>清除生成的目录，再<code>hexo g</code>生成一遍后部署，才有可能正常。</font></p>
-<h2 id="文件geneerate后错位"><a href="#文件geneerate后错位" class="headerlink" title="文件geneerate后错位"></a><font>文件geneerate后错位</font></h2><p><font face="微软雅黑" size=4 >我在写第二篇博客的时候需要配图，源图片是放在<code>../source/_post/文章文件同名文件夹/</code>下的，生成的时候应该生成到对应的目录下的，但是我在generate的时候却生成到了上一篇博客的目录下，并且文件名称还少了几个字母，拿这篇博客使用的图片举例，我放在源目录下的文件名为<code>github部署.png</code>，生成错位的目录下就变成了<code>thub部署.png</code>，我尝试过删掉文件、重新命名等一系列方法都无效，最后还是<code>hexo clean</code>再<code>hexo g</code>才解决。</font><br><font face="微软雅黑" size=4 >我不知道这是不是只有我一个人遇到过，不过我确实可以稳定触发这个问题，只要我往我的相应post添加图像文件，直接generate出来都会出现这种错位情况：</font><br><font face="微软雅黑" size=4 > </font><br><img src="/2024/09/08/Hexo-Chic-Problems/example.png" srcset="/img/loading.gif" lazyload class="" title="example" style="zoom:100%;"><br><font face="微软雅黑" size=4 > </font><br><font face="微软雅黑" size=4 color=#00A2E8 >（遇到问题慢慢写，有的时候懒瘾一犯就会无限制拖下去了(笑)）</font><br>&lt;font face&#x3D; size&#x3D;4 &gt;【最后编辑：2025&#x2F;02&#x2F;17】</font><br>&lt;font face&#x3D; size&#x3D;4 &gt;</font></p>
+<h2 id="文件geneerate后错位"><a href="#文件geneerate后错位" class="headerlink" title="文件geneerate后错位"></a><font>文件geneerate后错位</font></h2><p><font face="微软雅黑" size=4 >我在写第二篇博客的时候需要配图，源图片是放在<code>../source/_post/文章文件同名文件夹/</code>下的，生成的时候应该生成到对应的目录下的，但是我在generate的时候却生成到了上一篇博客的目录下，并且文件名称还少了几个字母，拿这篇博客使用的图片举例，我放在源目录下的文件名为<code>github部署.png</code>，生成错位的目录下就变成了<code>thub部署.png</code>，我尝试过删掉文件、重新命名等一系列方法都无效，最后还是<code>hexo clean</code>再<code>hexo g</code>才解决。</font><br><font face="微软雅黑" size=4 >我不知道这是不是只有我一个人遇到过，不过我确实可以稳定触发这个问题，只要我往我的相应post添加图像文件，直接generate出来都会出现这种错位情况：</font><br><font face="微软雅黑" size=4 > </font><br><img src="/2024/09/08/Hexo-Chic-Problems/example.png" srcset="/img/loading.gif" lazyload class="" title="example" style="zoom:100%;"><br><font face="微软雅黑" size=4 > </font><br><font face="微软雅黑" size=4 color=#00A2E8 >（遇到问题慢慢写，有的时候懒瘾一犯就会无限制拖下去了(笑)）</font></p>
+<p>【最后编辑：2025&#x2F;02&#x2F;17】</p>
 
                 
               </div>
