@@ -4,13 +4,25 @@
   
   
   <entry>
-    <title>Hexo-fluid-Problems</title>
+    <title>Hexo-fluid问题日志</title>
     <link href="/2025/03/31/Hexo-fluid-Problems/"/>
     <url>/2025/03/31/Hexo-fluid-Problems/</url>
     
     <content type="html"><![CDATA[]]></content>
     
     
+    <categories>
+      
+      <category>【MrWei95博客日志】</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>【Web】</tag>
+      
+    </tags>
     
   </entry>
   
@@ -153,9 +165,9 @@
       
       <tag>【龙芯久久派】</tag>
       
-      <tag>【CMake】</tag>
-      
       <tag>【Loongarch】</tag>
+      
+      <tag>【CMake】</tag>
       
     </tags>
     
