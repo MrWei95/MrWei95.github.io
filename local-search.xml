@@ -8,7 +8,7 @@
     <link href="/2025/05/26/C-FILE-Read-Write/"/>
     <url>/2025/05/26/C-FILE-Read-Write/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h2 id="fopen问题"><a href="#fopen问题" class="headerlink" title="fopen问题"></a>fopen问题</h2><p>我在VS2022中使用fopen函数，编译的时候会报错**’fopen’: This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.**这个错误。</p><p>一开始学C语言的时候就遇到过这个报错，意思就是这些函数不安全，可以define一个**_CRT_SECURE_NO_WARNINGS**来忽略报错。</p>]]></content>
     
     
     <categories>
