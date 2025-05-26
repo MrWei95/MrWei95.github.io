@@ -4,13 +4,25 @@
   
   
   <entry>
-    <title>C-FILE-Read-Write</title>
+    <title>C语言读写文本</title>
     <link href="/2025/05/26/C-FILE-Read-Write/"/>
     <url>/2025/05/26/C-FILE-Read-Write/</url>
     
     <content type="html"><![CDATA[]]></content>
     
     
+    <categories>
+      
+      <category>【编程学习笔记】</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>【C/C++】</tag>
+      
+    </tags>
     
   </entry>
   
@@ -231,7 +243,7 @@
     
     <categories>
       
-      <category>【SFML学习笔记】</category>
+      <category>【编程学习笔记】</category>
       
     </categories>
     
