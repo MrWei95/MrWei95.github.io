@@ -4,11 +4,11 @@
   
   
   <entry>
-    <title>ti_sysconfig_keil</title>
+    <title>Ti-Keil-环境配置</title>
     <link href="/2025/07/29/ti-sysconfig-keil/"/>
     <url>/2025/07/29/ti-sysconfig-keil/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>首先安装Ti的<a href="https://www.ti.com/tool/CCSTUDIO">CCS</a>和<a href="https://www.ti.com/tool/SYSCONFIG">Sysconfig</a>，CCS安装完首次打开创建MSPM0的工程后会自动配置好SDK，如果不想用CCS，可以手动安装<a href="https://www.ti.com.cn/tool/cn/MSPM0-SDK">SDK</a>，建议全部安装在默认地址(C盘)，别扯什么红盘危机，磁盘就是拿来存东西的！</p><p>安装完的状态如图：<br><img src="/2025/07/29/ti-sysconfig-keil/ti_data.png" alt="ti"><br>然后打开Keil，找到菜单栏的Tools，选择里面的Customize Tools Menu：<br><img src="/2025/07/29/ti-sysconfig-keil/customize.png" alt="Customize Tools Menu"><br>导入下面这个图片中路径的cfg文件(SDK版本按你实际安装的来)：<br><img src="/2025/07/29/ti-sysconfig-keil/import.png" alt="Import"><br>导入好之后在菜单栏的Tools里就能看到有Sysconfig选项了。</p><p>这个时候打开工程中的syscfg文件，然后打开Tools里的Sysconfig就会弹出图形化配置界面了。</p><p>但是这个时候大概率会报错，这种轻狂我们就要去修改SDK和Sysconfig的一些参数，出现这种问题的原因是它们自己默认的工具版本和实际安装的版本是不一样的(我也不知道Ti在搞什么鬼，怎么能出现这么麻烦的问题)</p><p>先修改SDK，进入SDK目录的<code>\tools\keil</code>目录，会看到一个<code>MSPM0_SDK_syscfg_menu_import.cfg</code>和一个<code>syscfg.bat</code>，我们修改这两个文件，sfg和bat修改部分如图：<br><img src="/2025/07/29/ti-sysconfig-keil/cfg.png" alt="Import"><br><img src="/2025/07/29/ti-sysconfig-keil/syscfg.png" alt="Import"><br>修改方式就是找到实际的Sysconfig路径，比如看开头图片，我装的的是Sysconfig1.24.1，但原本默认的是1.24.0(笑)。</p>]]></content>
     
     
     
@@ -201,9 +201,9 @@
       
       <tag>【龙芯久久派】</tag>
       
-      <tag>【Loongarch】</tag>
-      
       <tag>【CMake】</tag>
+      
+      <tag>【Loongarch】</tag>
       
     </tags>
     
