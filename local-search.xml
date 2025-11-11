@@ -4,11 +4,11 @@
   
   
   <entry>
-    <title>高版本Keil的arm compiler问题</title>
+    <title>高版本Keil的ARM Compiler问题</title>
     <link href="/2025/11/11/arm-compiler-5-problem/"/>
     <url>/2025/11/11/arm-compiler-5-problem/</url>
     
-    <content type="html"><![CDATA[<h1 id="Keil-MDK编译报错"><a href="#Keil-MDK编译报错" class="headerlink" title="Keil MDK编译报错"></a>Keil MDK编译报错</h1>]]></content>
+    <content type="html"><![CDATA[<h1 id="Keil-MDK编译报错"><a href="#Keil-MDK编译报错" class="headerlink" title="Keil MDK编译报错"></a>Keil MDK编译报错</h1><p>MDK从5.37开始就不包含AC5(ARM Compiler 5)了，但是很多旧的工程没法用AC6编译，所以我们要向Keil中导入AC5。</p><p>这件事本身不难，网上教程也一大堆，根本不值得我再写这玩意儿。但奈何去ARM官网下载的时候出问题了，官网要求登录后下载，但是我注册完之后它提示正在处理我的信息，72小时后仍有问题可以联系客服，这给我整懵了，第一次遇到这个问题是一年多前，今天我重装完Keil找AC5的时候尝试用我一年前的账户登录，结果又提示正在处理信息，5分钟后重试，接下来就是无限循环……我尝试重新注册账户依旧在处理……</p>]]></content>
     
     
     <categories>
