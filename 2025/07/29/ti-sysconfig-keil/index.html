@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://mrwei95.github.io/2025/07/29/ti-sysconfig-keil/syscfg.png">
 <meta property="og:image" content="https://mrwei95.github.io/2025/07/29/ti-sysconfig-keil/gui.png">
 <meta property="article:published_time" content="2025-07-29T11:38:32.000Z">
-<meta property="article:modified_time" content="2025-11-11T07:12:45.765Z">
+<meta property="article:modified_time" content="2025-11-14T06:28:54.173Z">
 <meta property="article:author" content="Tommy Wei">
 <meta property="article:tag" content="【嵌入式】">
 <meta property="article:tag" content="【MSPM0】">
@@ -290,8 +290,8 @@
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>然后打开Keil，找到菜单栏的Tools，选择里面的Customize Tools Menu：<br><img src="/2025/07/29/ti-sysconfig-keil/customize.png" srcset="/img/loading.gif" lazyload alt="Customize Tools Menu"><br>导入下面这个图片中路径的cfg文件(SDK版本按你实际安装的来)：<br><img src="/2025/07/29/ti-sysconfig-keil/import.png" srcset="/img/loading.gif" lazyload alt="Import"><br>导入好之后在菜单栏的Tools里就能看到有Sysconfig选项了。</p>
 <p>这个时候打开工程中的syscfg文件，然后打开Tools里的Sysconfig就会弹出图形化配置界面了。</p>
 <h1 id="解决Sysconfig报错问题"><a href="#解决Sysconfig报错问题" class="headerlink" title="解决Sysconfig报错问题"></a>解决Sysconfig报错问题</h1><p>这个时候大概率会报错，这种轻狂我们就要去修改SDK中Sysconfig的一些参数，出现这种问题的原因是它们自己默认的工具版本和实际安装的版本是不一样的(我也不知道Ti在搞什么鬼，怎么能出现这么麻烦的问题)</p>
-<p>进入SDK目录的<code>\tools\keil</code>目录，会看到一个<code>MSPM0_SDK_syscfg_menu_import.cfg</code>和一个<code>syscfg.bat</code>，我们修改这两个文件，sfg和bat修改部分如图：<br><img src="/2025/07/29/ti-sysconfig-keil/cfg.png" srcset="/img/loading.gif" lazyload alt="Import"><br><img src="/2025/07/29/ti-sysconfig-keil/syscfg.png" srcset="/img/loading.gif" lazyload alt="Import"><br>修改方式就是找到实际的Sysconfig路径，比如看开头图片，我装的的是Sysconfig1.24.1，但原本默认的是1.24.0(笑)，到此SDK修改好了。</p>
-<p>回到Keil，把Tools里原本错误的配置删掉重新导入cfg文件，现在应该就能正常使用了。<br><img src="/2025/07/29/ti-sysconfig-keil/gui.png" srcset="/img/loading.gif" lazyload alt="Import"></p>
+<p>进入SDK目录的<code>\tools\keil</code>目录，会看到一个<code>MSPM0_SDK_syscfg_menu_import.cfg</code>和一个<code>syscfg.bat</code>，我们修改这两个文件，sfg和bat修改部分如图：<br><img src="/2025/07/29/ti-sysconfig-keil/cfg.png" srcset="/img/loading.gif" lazyload alt="cfg"><br><img src="/2025/07/29/ti-sysconfig-keil/syscfg.png" srcset="/img/loading.gif" lazyload alt="syscfg"><br>修改方式就是找到实际的Sysconfig路径，比如看开头图片，我装的的是Sysconfig1.24.1，但原本默认的是1.24.0(笑)，到此SDK修改好了。</p>
+<p>回到Keil，把Tools里原本错误的配置删掉重新导入cfg文件，现在应该就能正常使用了。<br><img src="/2025/07/29/ti-sysconfig-keil/gui.png" srcset="/img/loading.gif" lazyload alt="gui"></p>
 <p>(本文完)</p>
 
                 
@@ -361,7 +361,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2025年11月11日</div>
+          <div>2025年11月14日</div>
         </div>
       
       
