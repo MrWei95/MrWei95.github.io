@@ -27,7 +27,7 @@
 <meta property="og:description" content="玩机有风险 刷机需谨慎本文讲述如何备份和恢复Android设备的字库。如需观看视频教程可跳转本人视频。文章、视频如有错误，欢迎指出！ 字库及其备份的意义字库可以简单理解为Android设备的分区。刷机时也会刷入分区，但刷入不完整。如果设备刚好是其他分区损坏了，那么即使线刷完整包也无法修复(例如基带)。所以为了预防特殊分区损坏、也为了预防不小心刷入格机模块(rm -rf &#x2F;)，玩机前我们需">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-16T05:26:54.000Z">
-<meta property="article:modified_time" content="2026-01-02T09:55:49.042Z">
+<meta property="article:modified_time" content="2026-01-02T09:58:21.544Z">
 <meta property="article:author" content="Tommy Wei">
 <meta property="article:tag" content="【Android】">
 <meta name="twitter:card" content="summary_large_image">
@@ -280,7 +280,7 @@
 <h1 id="字库及其备份的意义"><a href="#字库及其备份的意义" class="headerlink" title="字库及其备份的意义"></a>字库及其备份的意义</h1><p>字库可以简单理解为Android设备的分区。刷机时也会刷入分区，但刷入不完整。如果设备刚好是其他分区损坏了，那么即使线刷完整包也无法修复(例如基带)。所以为了预防特殊分区损坏、也为了预防不小心刷入格机模块(rm -rf &#x2F;)，玩机前我们需要自行备份Android设备的字库文件。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Shell">基带分区<br>高通机型：fsg，fsc，modemst1，modemst2<br>联发科机型：nvram，nvdata，nvcfg，persist，protect1，protect2，seccfg<br></code></pre></td></tr></table></figure>
 <p><font color=#FF000 >请注意！！！高通机型可直接使用本文的命令，联发科机型，请将本文命令中的<code>/dev/block/bootdevice/by-name</code>修改为<code>/dev/block/by-name</code></font></p>
-<h1 id="如何备份字库"><a href="#如何备份字库" class="headerlink" title="如何备份字库"></a>如何备份字库</h1><p><font color=#FF000 >本文使用的方法是手动在Shell中键入指令以达成备份字库的目的，酷安上有教程可在手机上直接执行备份和恢复，写的很好，但本人认为恢复部分有些许问题，因此不采用这种方法。缘由我已经在视频里说了，所以不要再在我视频评论区里说什么“XXX直接秒”之类的了，等你需要恢复字库的时候手机屏幕都不一定亮得起来。</font></p>
+<h1 id="如何备份字库"><a href="#如何备份字库" class="headerlink" title="如何备份字库"></a>如何备份字库</h1><p><font color=#FF000 >本文使用的方法是手动在Shell中键入指令以达成备份字库的目的，酷安上有教程可在手机上直接执行备份和恢复，写的很好，但是当你处于需要恢复字库的时候，手机屏幕都不一定亮得起来，因此不采用这种方法，所以不要再在我视频评论区里说什么“XXX直接秒”之类的了。</font></p>
 <h2 id="备份的前置条件"><a href="#备份的前置条件" class="headerlink" title="备份的前置条件"></a>备份的前置条件</h2><h3 id="·-设备已获取Root权限"><a href="#·-设备已获取Root权限" class="headerlink" title="· 设备已获取Root权限"></a>· 设备已获取Root权限</h3><p>我选择使用Magisk获取Root权限，获取方式参考<a target="_blank" rel="noopener" href="http://www.bilibili.com/video/BV17aY9e4E9o/">我的视频</a>。如果你的设备没有获取Root权限，那你无法使用本文的方法备份字库。如果你今后不考虑进行高风险操作就没有备份字库的必要。</p>
 <h3 id="·-设备已打开USB调试"><a href="#·-设备已打开USB调试" class="headerlink" title="· 设备已打开USB调试"></a>· 设备已打开USB调试</h3><p>在开发者选项中打开。</p>
 <h3 id="·-在设备上至少预留20GB可用空间"><a href="#·-在设备上至少预留20GB可用空间" class="headerlink" title="· 在设备上至少预留20GB可用空间"></a>· 在设备上至少预留20GB可用空间</h3><p>现代Android设备的分区很多，占用空间也很大，请在你的Android设备上预留足够的空间存放备份的字库文件。我的的小米平板6(pipa)备份文件大约十几GB。</p>
