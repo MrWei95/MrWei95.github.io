@@ -19,15 +19,15 @@
   <meta name="author" content="Tommy Wei">
   <meta name="keywords" content="">
   
-    <meta name="description" content="玩机有风险 刷机需谨慎本文将讲述如何备份和恢复Android设备的字库文件。如需观看视频教程可跳转本人视频。文章、视频如有错误，欢迎指出！ 字库及其备份的意义字库可以简单理解为Android设备的分区。刷机时也会刷入分区，但刷入不完整。如果设备刚好是其他分区损坏了，那么即使线刷完整包也无法修复(例如基带)。所以为了预防特殊分区损坏、也为了预防不小心刷入格机模块(rm -rf &#x2F;)，玩机前">
+    <meta name="description" content="玩机有风险 刷机需谨慎本文讲述如何备份和恢复Android设备的字库。如需观看视频教程可跳转本人视频。文章、视频如有错误，欢迎指出！ 字库及其备份的意义字库可以简单理解为Android设备的分区。刷机时也会刷入分区，但刷入不完整。如果设备刚好是其他分区损坏了，那么即使线刷完整包也无法修复(例如基带)。所以为了预防特殊分区损坏、也为了预防不小心刷入格机模块(rm -rf &#x2F;)，玩机前我们需">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android设备备份字库">
 <meta property="og:url" content="https://mrwei95.github.io/2024/08/16/Backup-Flash-Memory/index.html">
 <meta property="og:site_name" content="95的博客">
-<meta property="og:description" content="玩机有风险 刷机需谨慎本文将讲述如何备份和恢复Android设备的字库文件。如需观看视频教程可跳转本人视频。文章、视频如有错误，欢迎指出！ 字库及其备份的意义字库可以简单理解为Android设备的分区。刷机时也会刷入分区，但刷入不完整。如果设备刚好是其他分区损坏了，那么即使线刷完整包也无法修复(例如基带)。所以为了预防特殊分区损坏、也为了预防不小心刷入格机模块(rm -rf &#x2F;)，玩机前">
+<meta property="og:description" content="玩机有风险 刷机需谨慎本文讲述如何备份和恢复Android设备的字库。如需观看视频教程可跳转本人视频。文章、视频如有错误，欢迎指出！ 字库及其备份的意义字库可以简单理解为Android设备的分区。刷机时也会刷入分区，但刷入不完整。如果设备刚好是其他分区损坏了，那么即使线刷完整包也无法修复(例如基带)。所以为了预防特殊分区损坏、也为了预防不小心刷入格机模块(rm -rf &#x2F;)，玩机前我们需">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-16T05:26:54.000Z">
-<meta property="article:modified_time" content="2026-01-02T09:48:04.472Z">
+<meta property="article:modified_time" content="2026-01-02T09:55:49.042Z">
 <meta property="article:author" content="Tommy Wei">
 <meta property="article:tag" content="【Android】">
 <meta name="twitter:card" content="summary_large_image">
@@ -276,7 +276,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="玩机有风险-刷机需谨慎"><a href="#玩机有风险-刷机需谨慎" class="headerlink" title="玩机有风险 刷机需谨慎"></a><font color=#FF000 >玩机有风险 刷机需谨慎</font></h1><p>本文将讲述如何备份和恢复Android设备的字库文件。<br>如需观看视频教程可跳转<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1bje8eVEjK/">本人视频</a>。<br>文章、视频如有错误，欢迎指出！</p>
+                <h1 id="玩机有风险-刷机需谨慎"><a href="#玩机有风险-刷机需谨慎" class="headerlink" title="玩机有风险 刷机需谨慎"></a><font color=#FF000 >玩机有风险 刷机需谨慎</font></h1><p>本文讲述如何备份和恢复Android设备的字库。<br>如需观看视频教程可跳转<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1bje8eVEjK/">本人视频</a>。<br>文章、视频如有错误，欢迎指出！</p>
 <h1 id="字库及其备份的意义"><a href="#字库及其备份的意义" class="headerlink" title="字库及其备份的意义"></a>字库及其备份的意义</h1><p>字库可以简单理解为Android设备的分区。刷机时也会刷入分区，但刷入不完整。如果设备刚好是其他分区损坏了，那么即使线刷完整包也无法修复(例如基带)。所以为了预防特殊分区损坏、也为了预防不小心刷入格机模块(rm -rf &#x2F;)，玩机前我们需要自行备份Android设备的字库文件。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Shell">基带分区<br>高通机型：fsg，fsc，modemst1，modemst2<br>联发科机型：nvram，nvdata，nvcfg，persist，protect1，protect2，seccfg<br></code></pre></td></tr></table></figure>
 <p><font color=#FF000 >请注意！！！高通机型可直接使用本文的命令，联发科机型，请将本文命令中的<code>/dev/block/bootdevice/by-name</code>修改为<code>/dev/block/by-name</code></font></p>
