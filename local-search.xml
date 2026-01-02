@@ -4,11 +4,11 @@
   
   
   <entry>
-    <title>WinUI3_FirstStep</title>
+    <title>初学WinUI3</title>
     <link href="/2026/01/02/WinUI3-FirstStep/"/>
     <url>/2026/01/02/WinUI3-FirstStep/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p>不知道哪来的想法，想用Win11新的UI写一个串口助手，于是前几天就开始了。<br>这张图是目前的状态：<br><img src="/2026/01/02/WinUI3-FirstStep/demo.png" alt="串口助手UI"></p>]]></content>
     
     
     <categories>
