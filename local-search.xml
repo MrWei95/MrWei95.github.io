@@ -4,6 +4,37 @@
   
   
   <entry>
+    <title>构建未打包的WinUI3程序</title>
+    <link href="/2026/01/03/WinUI-NoPackage/"/>
+    <url>/2026/01/03/WinUI-NoPackage/</url>
+    
+    <content type="html"><![CDATA[<p>我希望编译出来的程序可以双击exe文件直接运行。<br><img src="/2026/01/03/WinUI-NoPackage/window.png" alt="测试的空模板"></p><h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><p>创建一个空的已打包的WinUI3 C++工程，编译能跑，关掉工程（这里如果保持VS打开，可能下面修改完会报错），接下来修改<code>.vcxproj</code>文件。</p><p>找到<code>&lt;PropertyGroup&gt;</code>标签（应该很靠前），找到Appx打包<code>&lt;AppxPackage&gt;</code>，默认的状态是<code>true</code>，把值改成<code>false</code>：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs XAML">&lt;AppxPackage&gt;false&lt;/AppxPackage&gt;<br></code></pre></td></tr></table></figure><p>接着在<code>&lt;PropertyGroup&gt;</code>的末尾添加</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs XAML">&lt;WindowsPackageType&gt;None&lt;/WindowsPackageType&gt;<br></code></pre></td></tr></table></figure><p>这样设置为不打包。</p><p>这样就可以编译出未打包的WinUI3程序了，目前程序有两个特征：<br>1.体积小（VS默认模板生成的Release大小为59.8MB）<br>2.需要设备安装WindowsAppSDK才能运行</p><p>换个设备就要装SDK太麻烦，所以我们编译的时候就带上SDK：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs XAML">&lt;WindowsAppSDKSelfContained&gt;true&lt;/WindowsAppSDKSelfContained&gt;<br></code></pre></td></tr></table></figure><p>这样就能随时随地运行，但是体积庞大（VS默认模板生成的Release大小为159MB）</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>【程序学习笔记】</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>【C/C++】</tag>
+      
+      <tag>【C#】</tag>
+      
+      <tag>【Windows】</tag>
+      
+      <tag>【WinUI】</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>初学WinUI3</title>
     <link href="/2026/01/02/WinUI3-FirstStep/"/>
     <url>/2026/01/02/WinUI3-FirstStep/</url>
