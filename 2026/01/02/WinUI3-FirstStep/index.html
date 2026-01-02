@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://mrwei95.github.io/2026/01/02/WinUI3-FirstStep/demo.png">
 <meta property="og:image" content="https://mrwei95.github.io/2026/01/02/WinUI3-FirstStep/winuinote.png">
 <meta property="article:published_time" content="2026-01-02T08:37:08.000Z">
-<meta property="article:modified_time" content="2026-01-02T09:08:02.189Z">
+<meta property="article:modified_time" content="2026-01-02T09:12:38.133Z">
 <meta property="article:author" content="Tommy Wei">
 <meta property="article:tag" content="【C#】">
 <meta property="article:tag" content="【Windows】">
@@ -228,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          195 字
+          307 字
         
       </span>
     
@@ -239,7 +239,7 @@
         
         
         
-          2 分钟
+          3 分钟
         
       </span>
     
@@ -282,7 +282,7 @@
               <div class="markdown-body">
                 
                 <p>不知道哪来的想法，想用Win11新的UI写一个串口助手，于是前几天就开始了。<br>这张图是目前的状态：<br><img src="/2026/01/02/WinUI3-FirstStep/demo.png" srcset="/img/loading.gif" lazyload alt="串口助手UI"><br>目前只是简单地把控件摆到窗口中，控件的功能没写，窗口还有很多谜之问题。</p>
-<p>装了个WinUI3画廊，跟着微软的<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/apps/tutorials/winui-notes/intro">教程</a>复制粘贴了一个简易笔记程序，非常简陋但确实是个能用的程序：<br><img src="/2026/01/02/WinUI3-FirstStep/winuinote.png" srcset="/img/loading.gif" lazyload alt="WinUINote"><br>这个过程花了大概一晚上，前后操作了两遍，第一遍是一边复制一遍做一些修改，结果发现后期的功能实现不了，陷入了两边比对代码问题的困境……第二遍就照着教程抄，只格式化代码，终于实现了教程的功能。</p>
+<p>装了个WinUI3画廊，跟着微软的<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/apps/tutorials/winui-notes/intro">教程</a>复制粘贴了一个简易笔记程序，非常简陋但确实是个能用的程序：<br><img src="/2026/01/02/WinUI3-FirstStep/winuinote.png" srcset="/img/loading.gif" lazyload alt="WinUINote"><br>这个过程花了大概一晚上，前后操作了两遍，第一遍是一边复制一遍做一些修改，结果发现后期的功能实现不了，陷入了两边比对代码问题的困境……第二遍就照着教程抄，只格式化代码，终于实现了教程的功能。<br>不过搞的时候发现，这程序功能倒没多少，内存占的真多啊，调试里面说占用大于100MB，任务管理器看这个单独进程就占了将近40MB，跟着教程写的那问题应该不是出在我这里，经过简单查找，发现这应该就是WinUI框架的问题，资源占用太高了……（现在突然明白Win11性能为什么这么差了）</p>
 
                 
               </div>
