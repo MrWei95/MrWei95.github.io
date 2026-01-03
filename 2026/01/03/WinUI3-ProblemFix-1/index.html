@@ -19,29 +19,28 @@
   <meta name="author" content="Tommy Wei">
   <meta name="keywords" content="">
   
-    <meta name="description" content="我希望编译出来的WinUI3程序可以双击exe文件直接运行。本文分成C++工程与C#工程两部分。 C++创建一个空的已打包的WinUI3 C++工程，编译能跑，关掉工程（这里如果保持VS打开，可能下面修改完会报错），接下来修改.vcxproj文件。 找到&lt;PropertyGroup&gt;标签（应该很靠前），找到Appx打包&lt;AppxPackage&gt;，默认的状态是true，把值改">
+    <meta name="description" content="B站的视频收到了很多回复，根据其中的内容修复我的串口上位机软件。 窗口残影闪烁问题的描述应该为来回拉伸窗口，右边或底边窗口会有明显残影闪烁，这个问题在GitHub上已经有人提交了Issue，动图上是一个深色窗口来回拖动出现白色闪烁，2021年6月4日至今将近5年，微软都没有彻底修好，开发人员回复的原话是：“We’re currently working on fixing this. The pl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="构建未打包的WinUI3程序">
-<meta property="og:url" content="https://mrwei95.github.io/2026/01/03/WinUI-NoPackage/index.html">
+<meta property="og:title" content="WinUI3基本窗口问题">
+<meta property="og:url" content="https://mrwei95.github.io/2026/01/03/WinUI3-ProblemFix-1/index.html">
 <meta property="og:site_name" content="95的博客">
-<meta property="og:description" content="我希望编译出来的WinUI3程序可以双击exe文件直接运行。本文分成C++工程与C#工程两部分。 C++创建一个空的已打包的WinUI3 C++工程，编译能跑，关掉工程（这里如果保持VS打开，可能下面修改完会报错），接下来修改.vcxproj文件。 找到&lt;PropertyGroup&gt;标签（应该很靠前），找到Appx打包&lt;AppxPackage&gt;，默认的状态是true，把值改">
+<meta property="og:description" content="B站的视频收到了很多回复，根据其中的内容修复我的串口上位机软件。 窗口残影闪烁问题的描述应该为来回拉伸窗口，右边或底边窗口会有明显残影闪烁，这个问题在GitHub上已经有人提交了Issue，动图上是一个深色窗口来回拖动出现白色闪烁，2021年6月4日至今将近5年，微软都没有彻底修好，开发人员回复的原话是：“We’re currently working on fixing this. The pl">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mrwei95.github.io/2026/01/03/WinUI-NoPackage/window.png">
-<meta property="og:image" content="https://mrwei95.github.io/2026/01/03/WinUI-NoPackage/cs_unpackage.png">
-<meta property="og:image" content="https://mrwei95.github.io/2026/01/03/WinUI-NoPackage/need_be_deployed.png">
-<meta property="article:published_time" content="2026-01-02T16:12:26.000Z">
-<meta property="article:modified_time" content="2026-01-03T06:08:39.860Z">
+<meta property="og:image" content="https://mrwei95.github.io/2026/01/03/WinUI3-ProblemFix-1/lol.png">
+<meta property="og:image" content="https://mrwei95.github.io/2026/01/03/WinUI3-ProblemFix-1/high.png">
+<meta property="og:image" content="https://mrwei95.github.io/2026/01/03/WinUI3-ProblemFix-1/low.png">
+<meta property="article:published_time" content="2026-01-03T06:07:56.000Z">
+<meta property="article:modified_time" content="2026-01-03T07:07:44.039Z">
 <meta property="article:author" content="Tommy Wei">
-<meta property="article:tag" content="C&#x2F;C++">
 <meta property="article:tag" content="C#">
 <meta property="article:tag" content="Windows">
 <meta property="article:tag" content="WinUI">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://mrwei95.github.io/2026/01/03/WinUI-NoPackage/window.png">
+<meta name="twitter:image" content="https://mrwei95.github.io/2026/01/03/WinUI3-ProblemFix-1/lol.png">
   
   
   
-  <title>构建未打包的WinUI3程序-95的博客</title>
+  <title>WinUI3基本窗口问题-95的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -207,7 +206,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="构建未打包的WinUI3程序"></span>
+            <span id="subtitle" data-typed-text="WinUI3基本窗口问题"></span>
           
         </div>
 
@@ -218,8 +217,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-01-03 00:12" pubdate>
-          2026年1月3日 凌晨
+        <time datetime="2026-01-03 14:07" pubdate>
+          2026年1月3日 下午
         </time>
       </span>
     
@@ -230,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          454 字
+          581 字
         
       </span>
     
@@ -241,7 +240,7 @@
         
         
         
-          4 分钟
+          5 分钟
         
       </span>
     
@@ -278,31 +277,24 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">构建未打包的WinUI3程序</h1>
+            <h1 id="seo-header">WinUI3基本窗口问题</h1>
             
             
               <div class="markdown-body">
                 
-                <p>我希望编译出来的WinUI3程序可以双击exe文件直接运行。<br><img src="/2026/01/03/WinUI-NoPackage/window.png" srcset="/img/loading.gif" lazyload alt="测试的空模板"><br>本文分成C++工程与C#工程两部分。</p>
-<h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><p>创建一个空的已打包的WinUI3 C++工程，编译能跑，关掉工程（这里如果保持VS打开，可能下面修改完会报错），接下来修改<code>.vcxproj</code>文件。</p>
-<p>找到<code>&lt;PropertyGroup&gt;</code>标签（应该很靠前），找到Appx打包<code>&lt;AppxPackage&gt;</code>，默认的状态是<code>true</code>，把值改成<code>false</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs XAML">&lt;AppxPackage&gt;false&lt;/AppxPackage&gt;<br></code></pre></td></tr></table></figure>
-
-<p>接着在<code>&lt;PropertyGroup&gt;</code>的末尾添加</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs XAML">&lt;!-- 不打包 --&gt;<br>&lt;WindowsPackageType&gt;None&lt;/WindowsPackageType&gt;<br></code></pre></td></tr></table></figure>
-<p>这样设置为不打包。</p>
-<p>这样就可以编译出未打包的WinUI3程序了，目前程序有两个特征：<br>1.体积小（VS默认模板生成的Release大小为59.8MB）<br>2.需要设备安装Windows App SDK才能运行</p>
-<p>换个设备就要装SDK太麻烦，所以我们编译的时候就带上SDK：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs XAML">&lt;!-- 自包含 Windows App SDK Runtime --&gt;<br>&lt;WindowsAppSDKSelfContained&gt;true&lt;/WindowsAppSDKSelfContained&gt;<br></code></pre></td></tr></table></figure>
-<p>这样就能随时随地运行，但是体积庞大（VS默认模板生成的Release大小为159MB）</p>
-<h1 id="C-1"><a href="#C-1" class="headerlink" title="C#"></a>C#</h1><p>C#的工程我拿手头微软给的<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/apps/tutorials/winui-notes/intro">WinUINote项目</a>测试，关掉工程（不关掉也可能报错），接下来修改<code>.csproj</code>文件。</p>
-<p>在<code>&lt;PropertyGroup&gt;</code>标签的末尾添加这两句：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs XAML">&lt;!-- 不打包 --&gt;<br>&lt;WindowsPackageType&gt;None&lt;/WindowsPackageType&gt;<br>&lt;!-- 自包含 Windows App SDK Runtime --&gt;<br>&lt;WindowsAppSDKSelfContained&gt;true&lt;/WindowsAppSDKSelfContained&gt;<br></code></pre></td></tr></table></figure>
-<p>写完之后打开工程，把生成切换为Unpackage：<br><img src="/2026/01/03/WinUI-NoPackage/cs_unpackage.png" srcset="/img/loading.gif" lazyload alt="生成"><br>不然会出现如下报错：<br><img src="/2026/01/03/WinUI-NoPackage/need_be_deployed.png" srcset="/img/loading.gif" lazyload alt="报错"></p>
-<p>和C++工程一样，生成不需要设备安装Windows App SDK就能直接双击运行的程序。</p>
-<p>测试了一下，包含SDK的程序目录大小为207MB，打包生成的大小为26.3MB。</p>
-<p>【本文完】</p>
-<p>参考资料：<br><a target="_blank" rel="noopener" href="https://karanocave.github.io/2025/01/01/%E6%9E%84%E5%BB%BA%E6%9C%AA%E6%89%93%E5%8C%85%E7%9A%84winui3%E7%A8%8B%E5%BA%8F/">KaranocaVe’s Blog</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/maijin/p/19067295">一些记录(博客园)</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/opus/1002523793032216582">小扳手咔咔(Bilibili)</a><br><a target="_blank" rel="noopener" href="https://www.shuzhiduo.com/A/gGdXMQ87z4/">WinUI 3 踩坑记</a></p>
+                <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15pvfBLErc/">B站的视频</a>收到了很多回复，根据其中的内容修复我的串口上位机软件。</p>
+<h1 id="窗口残影闪烁"><a href="#窗口残影闪烁" class="headerlink" title="窗口残影闪烁"></a>窗口残影闪烁</h1><p>问题的描述应该为<strong>来回拉伸窗口，右边或底边窗口会有明显残影闪烁</strong>，这个问题在GitHub上已经有人提交了<a target="_blank" rel="noopener" href="https://github.com/microsoft/microsoft-ui-xaml/issues/5148">Issue</a>，动图上是一个深色窗口来回拖动出现白色闪烁，2021年6月4日至今将近5年，微软都没有彻底修好，开发人员回复的原话是：“We’re currently working on fixing this. The plan is that instead of having that background color always be white it will instead be white or black depending on the value of Window.Content.RequestedTheme.”，也就是像让这个残影闪烁适配颜色模式：浅色模式就是白色残影，深色模式就是黑色残影……</p>
+<p>给我气笑了，治标不治本，快5年了都没法修复这么明显的问题！GitHub上都有人阴阳怪气微软：<br><img src="/2026/01/03/WinUI3-ProblemFix-1/lol.png" srcset="/img/loading.gif" lazyload alt="笑死我了"></p>
+<h1 id="标题栏调整大小行为失效"><a href="#标题栏调整大小行为失效" class="headerlink" title="标题栏调整大小行为失效"></a>标题栏调整大小行为失效</h1><h2 id="窗口调整表现"><a href="#窗口调整表现" class="headerlink" title="窗口调整表现"></a>窗口调整表现</h2><p>这个居然也是一个已知问题……<a target="_blank" rel="noopener" href="https://github.com/microsoft/microsoft-ui-xaml/issues/10374">Issue</a>在这里，只要通过<code>TitleBar.IconSource</code>设置了标题栏图标，拖动标题栏调整窗口大小的行为就会失效，具体表现如下：<br><img src="/2026/01/03/WinUI3-ProblemFix-1/high.png" srcset="/img/loading.gif" lazyload alt="拉长"><br><img src="/2026/01/03/WinUI3-ProblemFix-1/low.png" srcset="/img/loading.gif" lazyload alt="压缩"></p>
+<h2 id="如何调整标题栏代码"><a href="#如何调整标题栏代码" class="headerlink" title="如何调整标题栏代码"></a>如何调整标题栏代码</h2><p>需要在<code>&lt;TitleBar&gt;</code>中禁用<code>&lt;TitleBar.IconSource&gt;</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs XAML">&lt;TitleBar x:Name=&quot;AppTitleBar&quot; Title=&quot;串口助手&quot;&gt;<br>	&lt;!-- 设置了TitleBar.IconSource 调整窗口会出问题 --&gt;<br>	&lt;!-- https://github.com/microsoft/microsoft-ui-xaml/issues/10374 --&gt;<br>	&lt;!-- &lt;TitleBar.IconSource&gt; --&gt;<br>		&lt;!-- &lt;FontIconSource Glyph=&quot;&amp;#xE88E;&quot;/&gt; --&gt;<br>	&lt;!-- &lt;/TitleBar.IconSource&gt; --&gt;<br>&lt;/TitleBar&gt;<br></code></pre></td></tr></table></figure>
+<p>这样再拖动标题栏就没问题了。但这也是“如修”，这样窗口调整没问题，但如果有标题栏图标的需求那不两头堵了？</p>
+<p>这个问题微软至今没修……</p>
+<h1 id="限制窗口大小"><a href="#限制窗口大小" class="headerlink" title="限制窗口大小"></a>限制窗口大小</h1><h2 id="AppWindow-Presenter属性"><a href="#AppWindow-Presenter属性" class="headerlink" title="AppWindow.Presenter属性"></a>AppWindow.Presenter属性</h2><p>评论区有佬表示WinUI3 1.8版本之后可以使用<code>AppWindow.Presenter</code>属性进行设置，但是DPI更改事件需要自己处理，因为<code>Presenter</code>使用的是未经缩放处理的像素值。</p>
+<p>代码如下：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C#"><span class="hljs-comment">// 限制窗口最小大小</span><br><span class="hljs-comment">// 需要自己处理DPI更改事件</span><br><span class="hljs-keyword">if</span> (AppWindow.Presenter <span class="hljs-keyword">is</span> OverlappedPresenter presenter)<br>&#123;<br>	presenter.PreferredMinimumWidth = <span class="hljs-number">800</span>;<br>	presenter.PreferredMinimumHeight = <span class="hljs-number">460</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>用起来很方便，但是之后要解决DPI更改带来的问题，我的笔记本电脑显示器是125%缩放，但是独立显示器是100%缩放，拖动窗口会有问题。</p>
+<h2 id="处理DPI更改事件"><a href="#处理DPI更改事件" class="headerlink" title="处理DPI更改事件"></a>处理DPI更改事件</h2><p>【未完成】</p>
 
                 
               </div>
@@ -336,8 +328,6 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/C-C/" class="print-no-link">#C/C++</a>
-      
         <a href="/tags/C/" class="print-no-link">#C#</a>
       
         <a href="/tags/Windows/" class="print-no-link">#Windows</a>
@@ -354,8 +344,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>构建未打包的WinUI3程序</div>
-      <div>https://mrwei95.github.io/2026/01/03/WinUI-NoPackage/</div>
+      <div>WinUI3基本窗口问题</div>
+      <div>https://mrwei95.github.io/2026/01/03/WinUI3-ProblemFix-1/</div>
     </div>
     <div class="license-meta">
       
@@ -388,18 +378,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/01/03/WinUI3-ProblemFix-1/" title="WinUI3基本窗口问题">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">WinUI3基本窗口问题</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/01/02/WinUI3-FirstStep/" title="初学WinUI3">
-                        <span class="hidden-mobile">初学WinUI3</span>
+                      <a href="/2026/01/03/WinUI-NoPackage/" title="构建未打包的WinUI3程序">
+                        <span class="hidden-mobile">构建未打包的WinUI3程序</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
