@@ -19,28 +19,26 @@
   <meta name="author" content="Tommy Wei">
   <meta name="keywords" content="">
   
-    <meta name="description" content="B站的视频收到了很多回复，根据其中的内容修复我的串口上位机软件。 窗口残影闪烁问题的描述应该为来回拉伸窗口，右边或底边窗口会有明显残影闪烁，这个问题在GitHub上已经有人提交了Issue，动图上是一个深色窗口来回拖动出现白色闪烁，2021年6月4日至今将近5年，微软都没有彻底修好，开发人员回复的原话是：“We’re currently working on fixing this. The pl">
+    <meta name="description" content="微软相关网页表示Windows沙盒中的错误代码0x80070003通常表示系统找不到启动沙盒所需的指定路径或文件。 但这句话对我基本没帮助，我不会闲的蛋疼去乱删系统文件，而且我这是新安装的系统，昨天沙盒还能用今天就用不了。 一般出现这个问题是因为强制卸载了Edge浏览器，导致沙盒找不到它…… 是的，运行并不十分流畅的的沙盒没有预装记事本、图片查看器，但是却要求运行一个臃肿不堪的浏览器！ 解决方法就">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WinUI3基本窗口问题">
-<meta property="og:url" content="https://mrwei95.github.io/2026/01/03/WinUI3-ProblemFix-1/index.html">
+<meta property="og:title" content="Windows沙盒启动报错0x80070003">
+<meta property="og:url" content="https://mrwei95.github.io/2026/01/09/Windows-Sandbox-Error-0x80070003/index.html">
 <meta property="og:site_name" content="95的博客">
-<meta property="og:description" content="B站的视频收到了很多回复，根据其中的内容修复我的串口上位机软件。 窗口残影闪烁问题的描述应该为来回拉伸窗口，右边或底边窗口会有明显残影闪烁，这个问题在GitHub上已经有人提交了Issue，动图上是一个深色窗口来回拖动出现白色闪烁，2021年6月4日至今将近5年，微软都没有彻底修好，开发人员回复的原话是：“We’re currently working on fixing this. The pl">
+<meta property="og:description" content="微软相关网页表示Windows沙盒中的错误代码0x80070003通常表示系统找不到启动沙盒所需的指定路径或文件。 但这句话对我基本没帮助，我不会闲的蛋疼去乱删系统文件，而且我这是新安装的系统，昨天沙盒还能用今天就用不了。 一般出现这个问题是因为强制卸载了Edge浏览器，导致沙盒找不到它…… 是的，运行并不十分流畅的的沙盒没有预装记事本、图片查看器，但是却要求运行一个臃肿不堪的浏览器！ 解决方法就">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://mrwei95.github.io/2026/01/03/WinUI3-ProblemFix-1/lol.png">
-<meta property="og:image" content="https://mrwei95.github.io/2026/01/03/WinUI3-ProblemFix-1/high.png">
-<meta property="og:image" content="https://mrwei95.github.io/2026/01/03/WinUI3-ProblemFix-1/low.png">
-<meta property="article:published_time" content="2026-01-03T06:07:56.000Z">
-<meta property="article:modified_time" content="2026-01-03T07:18:45.919Z">
+<meta property="og:image" content="https://mrwei95.github.io/2026/01/09/Windows-Sandbox-Error-0x80070003/error.png">
+<meta property="og:image" content="https://mrwei95.github.io/2026/01/09/Windows-Sandbox-Error-0x80070003/fixed.png">
+<meta property="article:published_time" content="2026-01-09T08:53:31.000Z">
+<meta property="article:modified_time" content="2026-01-09T09:11:54.846Z">
 <meta property="article:author" content="Tommy Wei">
-<meta property="article:tag" content="C#">
 <meta property="article:tag" content="Windows">
-<meta property="article:tag" content="WinUI">
+<meta property="article:tag" content="报错">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://mrwei95.github.io/2026/01/03/WinUI3-ProblemFix-1/lol.png">
+<meta name="twitter:image" content="https://mrwei95.github.io/2026/01/09/Windows-Sandbox-Error-0x80070003/error.png">
   
   
   
-  <title>WinUI3基本窗口问题-95的博客</title>
+  <title>Windows沙盒启动报错0x80070003-95的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -206,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="WinUI3基本窗口问题"></span>
+            <span id="subtitle" data-typed-text="Windows沙盒启动报错0x80070003"></span>
           
         </div>
 
@@ -217,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-01-03 14:07" pubdate>
-          2026年1月3日 下午
+        <time datetime="2026-01-09 16:53" pubdate>
+          2026年1月9日 下午
         </time>
       </span>
     
@@ -229,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          581 字
+          267 字
         
       </span>
     
@@ -240,7 +238,7 @@
         
         
         
-          5 分钟
+          3 分钟
         
       </span>
     
@@ -277,24 +275,16 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">WinUI3基本窗口问题</h1>
+            <h1 id="seo-header">Windows沙盒启动报错0x80070003</h1>
             
             
               <div class="markdown-body">
                 
-                <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV15pvfBLErc/">B站的视频</a>收到了很多回复，根据其中的内容修复我的串口上位机软件。</p>
-<h1 id="窗口残影闪烁"><a href="#窗口残影闪烁" class="headerlink" title="窗口残影闪烁"></a>窗口残影闪烁</h1><p>问题的描述应该为<strong>来回拉伸窗口，右边或底边窗口会有明显残影闪烁</strong>，这个问题在GitHub上已经有人提交了<a target="_blank" rel="noopener" href="https://github.com/microsoft/microsoft-ui-xaml/issues/5148">Issue</a>，动图上是一个深色窗口来回拖动出现白色闪烁，2021年6月4日至今将近5年，微软都没有彻底修好，开发人员回复的原话是：“We’re currently working on fixing this. The plan is that instead of having that background color always be white it will instead be white or black depending on the value of Window.Content.RequestedTheme.”，也就是像让这个残影闪烁适配颜色模式：浅色模式就是白色残影，深色模式就是黑色残影……</p>
-<p>给我气笑了，治标不治本，快5年了都没法修复这么明显的问题！GitHub上都有人阴阳怪气微软：<br><img src="/2026/01/03/WinUI3-ProblemFix-1/lol.png" srcset="/img/loading.gif" lazyload alt="笑死我了"></p>
-<h1 id="标题栏调整大小行为失效"><a href="#标题栏调整大小行为失效" class="headerlink" title="标题栏调整大小行为失效"></a>标题栏调整大小行为失效</h1><h2 id="窗口调整表现"><a href="#窗口调整表现" class="headerlink" title="窗口调整表现"></a>窗口调整表现</h2><p>这个居然也是一个已知问题……<a target="_blank" rel="noopener" href="https://github.com/microsoft/microsoft-ui-xaml/issues/10374">Issue</a>在这里，只要通过<code>TitleBar.IconSource</code>设置了标题栏图标，拖动标题栏调整窗口大小的行为就会失效，具体表现如下：<br><img src="/2026/01/03/WinUI3-ProblemFix-1/high.png" srcset="/img/loading.gif" lazyload alt="拉长"><img src="/2026/01/03/WinUI3-ProblemFix-1/low.png" srcset="/img/loading.gif" lazyload alt="压缩"></p>
-<h2 id="如何调整标题栏代码"><a href="#如何调整标题栏代码" class="headerlink" title="如何调整标题栏代码"></a>如何调整标题栏代码</h2><p>需要在<code>&lt;TitleBar&gt;</code>中禁用<code>&lt;TitleBar.IconSource&gt;</code>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs XAML">&lt;TitleBar x:Name=&quot;AppTitleBar&quot; Title=&quot;串口助手&quot;&gt;<br>	&lt;!-- 设置了TitleBar.IconSource 调整窗口会出问题 --&gt;<br>	&lt;!-- https://github.com/microsoft/microsoft-ui-xaml/issues/10374 --&gt;<br>	&lt;!-- &lt;TitleBar.IconSource&gt; --&gt;<br>		&lt;!-- &lt;FontIconSource Glyph=&quot;&amp;#xE88E;&quot;/&gt; --&gt;<br>	&lt;!-- &lt;/TitleBar.IconSource&gt; --&gt;<br>&lt;/TitleBar&gt;<br></code></pre></td></tr></table></figure>
-<p>这样再拖动标题栏就没问题了。但这也是“如修”，这样窗口调整没问题，但如果有标题栏图标的需求那不两头堵了？</p>
-<p>这个问题微软至今没修……</p>
-<h1 id="限制窗口大小"><a href="#限制窗口大小" class="headerlink" title="限制窗口大小"></a>限制窗口大小</h1><h2 id="AppWindow-Presenter属性"><a href="#AppWindow-Presenter属性" class="headerlink" title="AppWindow.Presenter属性"></a>AppWindow.Presenter属性</h2><p>评论区有佬表示WinUI3 1.8版本之后可以使用<code>AppWindow.Presenter</code>属性进行设置，但是DPI更改事件需要自己处理，因为<code>Presenter</code>使用的是未经缩放处理的像素值。</p>
-<p>代码如下：</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C#"><span class="hljs-comment">// 限制窗口最小大小</span><br><span class="hljs-comment">// 需要自己处理DPI更改事件</span><br><span class="hljs-keyword">if</span> (AppWindow.Presenter <span class="hljs-keyword">is</span> OverlappedPresenter presenter)<br>&#123;<br>	presenter.PreferredMinimumWidth = <span class="hljs-number">800</span>;<br>	presenter.PreferredMinimumHeight = <span class="hljs-number">460</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>用起来很方便，但是之后要解决DPI更改带来的问题，我的笔记本电脑显示器是125%缩放，但是独立显示器是100%缩放，拖动窗口会有问题。</p>
-<h2 id="处理DPI更改事件"><a href="#处理DPI更改事件" class="headerlink" title="处理DPI更改事件"></a>处理DPI更改事件</h2><p>【未完成】</p>
+                <p><img src="/2026/01/09/Windows-Sandbox-Error-0x80070003/error.png" srcset="/img/loading.gif" lazyload><br>微软相关网页表示Windows沙盒中的错误代码<code>0x80070003</code>通常表示系统找不到启动沙盒所需的指定路径或文件。</p>
+<p>但这句话对我基本没帮助，我不会闲的蛋疼去乱删系统文件，而且我这是新安装的系统，昨天沙盒还能用今天就用不了。</p>
+<p>一般出现这个问题是因为强制卸载了Edge浏览器，导致沙盒找不到它……</p>
+<p>是的，运行并不十分流畅的的沙盒没有预装记事本、图片查看器，但是却要求运行一个臃肿不堪的浏览器！</p>
+<p>解决方法就是不要卸载Edge；或者卸载后保留<code>&quot;C:\Program Files (x86)\Microsoft\Edge\Application&quot;</code>目录，里面随便放一个msedge.exe，但这个方法我用了第二天还是报<code>0x80070003</code>，经过重装Edge发现就是它的问题……所以既不想要Edge又想用沙盒的最完美解决方案就是卸载Edge Update但保留Edge本身，然后用别的程序文件覆盖msedge.exe。<br><img src="/2026/01/09/Windows-Sandbox-Error-0x80070003/fixed.png" srcset="/img/loading.gif" lazyload></p>
 
                 
               </div>
@@ -303,36 +293,13 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%A8%8B%E5%BA%8F%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">程序学习笔记</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/C/" class="print-no-link">#C#</a>
-      
         <a href="/tags/Windows/" class="print-no-link">#Windows</a>
       
-        <a href="/tags/WinUI/" class="print-no-link">#WinUI</a>
+        <a href="/tags/%E6%8A%A5%E9%94%99/" class="print-no-link">#报错</a>
       
     </div>
   
@@ -344,8 +311,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>WinUI3基本窗口问题</div>
-      <div>https://mrwei95.github.io/2026/01/03/WinUI3-ProblemFix-1/</div>
+      <div>Windows沙盒启动报错0x80070003</div>
+      <div>https://mrwei95.github.io/2026/01/09/Windows-Sandbox-Error-0x80070003/</div>
     </div>
     <div class="license-meta">
       
@@ -357,13 +324,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年1月3日</div>
+          <div>2026年1月9日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2026年1月3日</div>
+          <div>2026年1月9日</div>
         </div>
       
       
@@ -378,18 +345,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/01/09/Windows-Sandbox-Error-0x80070003/" title="Windows沙盒启动报错0x80070003">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Windows沙盒启动报错0x80070003</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/01/03/WinUI-NoPackage/" title="构建未打包的WinUI3程序">
-                        <span class="hidden-mobile">构建未打包的WinUI3程序</span>
+                      <a href="/2026/01/03/WinUI3-ProblemFix-1/" title="WinUI3基本窗口问题">
+                        <span class="hidden-mobile">WinUI3基本窗口问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

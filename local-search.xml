@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>Windows沙盒启动报错0x80070003</title>
+    <link href="/2026/01/09/Windows-Sandbox-Error-0x80070003/"/>
+    <url>/2026/01/09/Windows-Sandbox-Error-0x80070003/</url>
+    
+    <content type="html"><![CDATA[<p><img src="/2026/01/09/Windows-Sandbox-Error-0x80070003/error.png"><br>微软相关网页表示Windows沙盒中的错误代码<code>0x80070003</code>通常表示系统找不到启动沙盒所需的指定路径或文件。</p><p>但这句话对我基本没帮助，我不会闲的蛋疼去乱删系统文件，而且我这是新安装的系统，昨天沙盒还能用今天就用不了。</p><p>一般出现这个问题是因为强制卸载了Edge浏览器，导致沙盒找不到它……</p><p>是的，运行并不十分流畅的的沙盒没有预装记事本、图片查看器，但是却要求运行一个臃肿不堪的浏览器！</p><p>解决方法就是不要卸载Edge；或者卸载后保留<code>&quot;C:\Program Files (x86)\Microsoft\Edge\Application&quot;</code>目录，里面随便放一个msedge.exe，但这个方法我用了第二天还是报<code>0x80070003</code>，经过重装Edge发现就是它的问题……所以既不想要Edge又想用沙盒的最完美解决方案就是卸载Edge Update但保留Edge本身，然后用别的程序文件覆盖msedge.exe。<br><img src="/2026/01/09/Windows-Sandbox-Error-0x80070003/fixed.png"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Windows</tag>
+      
+      <tag>报错</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>WinUI3基本窗口问题</title>
     <link href="/2026/01/03/WinUI3-ProblemFix-1/"/>
     <url>/2026/01/03/WinUI3-ProblemFix-1/</url>
@@ -99,12 +120,6 @@
     
     <content type="html"><![CDATA[<h1 id="中英文等距字体"><a href="#中英文等距字体" class="headerlink" title="中英文等距字体"></a>中英文等距字体</h1><h2 id="JetBrains-Maple-Mono"><a href="#JetBrains-Maple-Mono" class="headerlink" title="JetBrains Maple Mono"></a><a href="https://github.com/SpaceTimee/Fusion-JetBrainsMapleMono">JetBrains Maple Mono</a></h2><p><em><strong>一只基于 Github Workflows (Bash) 的 JetBrains Mono + Maple Mono 合成字体</strong></em><br><strong>字体特征：</strong></p><ul><li>完美融合，Maple Mono 补充 JetBrains Mono 中日字形空缺</li><li>高可读性，等宽无衬线，中英文 2:1 宽完美对齐</li><li>丰富字重，智能连字，Nerd Font，Hints 原生支持</li><li>实时更新，构建合成优化发布全流程自动化</li></ul><p>试了一下，字体非常美观：<br><img src="/2025/11/17/monospace-font-recommand/hd.png" alt="高分辨率"><br>低分辨率下可读性也很好：<br><img src="/2025/11/17/monospace-font-recommand/ld.png" alt="低分辨率"></p>]]></content>
     
-    
-    <categories>
-      
-      <category>实用工具推荐</category>
-      
-    </categories>
     
     
     <tags>
